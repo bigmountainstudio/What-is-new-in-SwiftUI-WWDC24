@@ -10,12 +10,13 @@ A list of everything new in SwiftUI after WWDC 2023.
 ### Topic
 
 # SwiftUI Views
+[SwiftUI Updates Reference](https://developer.apple.com/documentation/Updates/SwiftUI)
 ## Chapter
 ### Topic
 
 # SwiftUI Animations
-## Chapter
-### Topic
+## WithAnimation
+### [Completions](https://developer.apple.com/documentation/SwiftUI/withAnimation(_:completionCriteria:_:completion:))
 
 # Core Data?
 ## Chapter
