@@ -1,4 +1,4 @@
-# data-frameworks channel
+# Slack data-frameworks channel
 WWDC Bot
 APP  6 days ago
 @Steven asked:
@@ -17,16 +17,12 @@ Is it possible for CoreData and SwiftData to coexist in an app if support for ol
 Patrick K (Apple)
   6 days ago
 You’ll be able to migrate from Core Data to a full SwiftData implementation or have both co-exist in the same project! Check out Luvena’s Migrate to SwiftData video Thursday morning for more information about both of those options!
-:smiley:
-2
-
 
 
 Patrick K (Apple)
   6 days ago
 Xcode even has support for generating SwiftData models in code from your existing Core Data managed object models!
 :the_horns:
-3
 
 
 
