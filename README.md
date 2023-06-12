@@ -10,7 +10,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 # Working with Data
 * [@Observable](https://developer.apple.com/documentation/Observation)
 * [@Environment]()
-* [@Observable]()
+* [@Observable](https://developer.apple.com/documentation/observation/observable-swift.macro) - Replaces ObservableObject.
 * [onChange(of:)](https://developer.apple.com/documentation/SwiftUI/View/onChange(of:initial:_:)-4psgg) - Replaces previous onChange(of:).
 
 # SwiftUI Views
@@ -19,6 +19,10 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [navigationDestination](https://developer.apple.com/documentation/SwiftUI/View/navigationDestination(item:destination:)) - Associates a destination view with a bound value.
 * [toolbarTitleDisplayMode](https://developer.apple.com/documentation/SwiftUI/View/toolbarTitleDisplayMode(_:)) - Configures the toolbar title display mode for this view.
 * [UnevenRoundedRectangle](https://developer.apple.com/documentation/swiftui/unevenroundedrectangle) - Create rectangles with individual rounded corners.
+
+## Charts
+* [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts.  
+
 ## List
 * [alternatingRowBackgrounds](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) - Specifies alternating row backgrounds on list or table. Can be .enabled, .disabled, or .automatic.
 * [backgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence) - Make rows stand out more. Can be .standard or .increased.
