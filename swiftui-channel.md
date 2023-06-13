@@ -7882,1163 +7882,172 @@ It is a little easier with SwiftData to create your objects for previews though,
 
 ----
 
-@Tien
+@Alperen
  asked:
-Are previews conforming to PreviewProvider automatically stripped from enterprise builds?
+Is "#if DEBUG" thing in previews has a visible effect to size, performance, or any other thing in production? I personally don't prefer to use it, and not sure I should.
+5 replies
 
+WWDC Bot
+APP  5 days ago
 @Jonathan P (Apple)
  answered:
-If you have all optimizations turned on for release builds and do not reference the conformers to PreviewProvider, then dead code stripping should help in this regard. If you want to make 100% sure to exclude code from a release build, then we recommend wrapping it in an "#if DEBUG" compile time conditional block.
+This is a standard compiler conditional to hide code from release builds. You can use it for anything, including Previews code. Ideally, during a release build the optimization levels set for the compiler and linker end up stripping unused non-public code out. Often, relying on this is fine. But if…
+See more
+
+
+Jonathan P (Apple)
+  5 days ago
+One benefit of using #if DEBUG is that it really does force you to make sure you don't expose anything public that you wanted stripped out. It's a compiler failure to reference anything in #if DEBUG if you try to build in release.
+:raised_hands::raised_hands::skin-tone-2:
+
+Jaanus
+  5 days ago
+I use #if DEBUG to provide mock resources of various things, and use those in Previous.
+```
+#if DEBUG
+extension SomeModelObject {
+  static var forPreview: SomeModelObject { ... }
+}
+#endif
+```
+
+Noam
+  5 days ago
+Isn’t it possible to put the sample data under Development Assets? Wouldn’t that remove it from the final release build as well?
+
+Jaanus
+  5 days ago
+You can put data in Preview Assets catalog and that works fine. One downside of that is that Preview Assets catalog is available only in toplevel app target, but not in SPM modules, I asked about it the other day here.
 
 ----
 
-@David
+@Cristian-Mihai
  asked:
-Hi. I'm developing a SwiftUI app with Core Data backed by Cloudkit. There are c. 5 entities involved with relationships between them. I'm really struggling getting Previews to work, I've figured out how to generate sample data but the Previews keep crashing. Are there any good tutorials / code examples for this scenario?
+I saw that there's a known issue in which `#Preview` isn't compatible with targets earlier than iOS 17 in another question. This got me wondering: what's different? Shouldn't it work the same, since it should be same code except it uses macros?
+6 replies
 
 WWDC Bot
-APP  6 days ago
-@Charles A (Apple)
- answered:
-There aren't any examples that are specifically for this scenario, but I would recommend setting up a separate in memory only persistent container that you use inside your previews. There is actually a simple example of this strategy in the new project template that you can see by creating a new project with the SwiftUI interface option and CoreData storage option selected.
-
-----
-
-@Pyry
- asked:
-In a modularised project with Swift modules depending on each other in two or more layers, is there any way to make Xcode less picky on having the right build scheme selected?
-(In one case, previews were constantly failing and ultimately the reason was having two editors with previews open side by side, but the files belonged in different modules, so no build scheme was right.)
-
-WWDC Bot
-APP  6 days ago
-@Kristofer K (Apple)
- answered:
-Previews will try to pull in various streams of information like your open file(s) and active scheme, but it won't try to infer which scheme a file should belong to. You may be able to setup a new scheme that builds both targets those files would belong to.
-
-----
-
-@Naftali
- asked:
-When adding in coredata/ swiftdata to previes, even with adding a preview container, everytime it will be recreating the data, I would love for it to work the way app preview does, where the data stays the (somewhat) persists
-4 replies
-
-WWDC Bot
-APP  6 days ago
-@Charles A (Apple)
- answered:
-Filing feedback with the Feedback Assistant is a great way to let us know what you would find useful!
-:+1:
-
-
-Charles A (Apple)
-  6 days ago
-Having said that, the data in a preview can be persisted.
-
-If you setup an NSPersistentContainer that uses an on disk persistence strategy, it should be persisted. The challenge will be clearing that data store if you need to migrate the schema or reset the data. (edited) 
-
-(the same is true for SwiftData, where you can use a modelContainer view modifier to create a container that will persist to disk)
-
-----
-
-@Alex
- asked:
-For you, the Preview developers, is the new macro just a nicer experience for the users or has this new Swift capability allowed you to build something better that was not doable before?
-:heart:
-
-WWDC Bot
-APP  6 days ago
 @Kevin C (Apple)
  answered:
-The new macro introduces underlying new API for defining previews. For SwiftUI this is mostly an ergonomic improvement, but it also fixes some longstanding bugs when using views that have `ViewBuilder` and you would expect the system to put it into an implicit VStack (like what happens at runtime), but instead generated multiple previews. Now it correctly creates a single preview with an implicit stack. It also adds support for UIKit & AppKit previews directly without needing to even importing SwiftUI.
+It's not the same code :)  The preview macro is implemented with an entirely new preview API under the hood.
+
+Christoph
+  5 days ago
+:astonished:
+
+Jonathan P (Apple)
+  5 days ago
+To be clear, your code under preview is the same. :slightly_smiling_face: It's the registration of it that we rewrote and hide all the ugly bits behind the awesome macro.
 
 ----
 
-@Valentin
+@Jun
  asked:
-Should the PreviewProvider protocol be used in cases where we need to create @State or other dynamic properties or do the new macros support those cases as well?
+How can I preview a view without being contained in an iPhone bezel nor a Mac Window?
+I want to preview a single view component in its natural compact size but from Xcode 14 and above previews it in a iPhone bezel or a Mac Window, fitting edges to it.
 8 replies
 
 WWDC Bot
-APP  6 days ago
-@Eliza B (Apple)
+APP  5 days ago
+@Chris J (Apple)
  answered:
-Nope, there's a couple ways you can make this work with #Preview.
+you can instruct the preview to show you a size-that-fits version in the "Selectable" mode in the preview canvas.
 
 
-Eliza B (Apple)
-  6 days ago
-The pattern you want is something like this:
-```
-#Preview {
-   struct Wrapper: View {
-      @State var toggled: Bool = false
-      Toggle("toggle", isOn: $toggled)
-   }
-   return Wrapper()
-}
-```
-
-(Where I'm imagining that you're trying to preview a Toggle but obviously you could define whatever state you need to preview your actual view.)
-
-
-But there's a convenience you can define to make this doable with less boilerplate.
-
-Define this outside of your preview:
-```
-struct WithPreviewState<S>: View {
-    @State var state: S
-    var makeBody: (Binding<S>) -> any View
-    
-    init(
-        _ state: S,
-        @ViewBuilder makeBody: @escaping (Binding<S>) -> some View
-    ) {
-        self._state = State(initialValue: state)
-        self.makeBody = makeBody
-    }
-    
-    var body: some View {
-        AnyView(makeBody($state))
-    }
-}
-```
-
-Then you can write previews like this:
-```
-#Preview {
-   WithPreviewState(true) { toggled in
-      Toggle("toggle", isOn: toggled)
-   }
-}
-```
-
-----
-
-@Deeje
- asked:
-All of my views use CoreData, which makes previews challenging, thoughts?
-
-
-WWDC Bot
-APP  6 days ago
-@Charles A (Apple)
- answered:
-The easiest thing to do is to setup an in memory only persistent container for use with previews. You can see a simple example of this approach in the new project template if you select the SwiftUI interface option and the CoreData storage option. Are there more specific challenges that you're wondering about?
-
-----
-
-@Bill
- asked:
-I'm using `#Preview` to display a UIKit view (not SwiftUI), but no matter what frame I provide, the view always has the same (too small) size in the preview screen. Is there something else I need to do to adjust the size? I also tried with a simple UILabel and gave it a red background color - it seemed to be sized precisely to the text size, and my frame had no effect.
-
-WWDC Bot
-APP  6 days ago
-@Charles A (Apple)
- answered:
-Previews use AutoLayout, so the frame you pass would be overridden by the UILabel content size. Have you tried constraining the view with AutoLayout?
-
-Bill
-  6 days ago
-Thanks for the reply - I was wondering if that might be the problem, but the view doesn’t have a superview at the time I create it
-
-Charles A (Apple)
-  6 days ago
-You could create a specific height and width constraint if you wanted to or create a wrapper view with different constraints in your preview.
-
-----
-
-@Bruno
- asked:
-When using SwiftUI preview targeting Apple TV, is it possible to interact with the preview somehow?
-:white_check_mark:
-
-WWDC Bot
-APP  6 days ago
-@Eliza B (Apple)
- answered:
-Unfortunately not, events for tvOS previews are currently not working. This is a known issue but feel free to file a Feedback to indicate that you'd like this fixed!
-
-----
-
-@Nayan
- asked:
-What happened to previewing on device? I remember there were some issues with it when it first launched but it worked fine later on. Recently I haven't been seeing much of it.
-8 replies
-
-WWDC Bot
-APP  6 days ago
-@Kristofer K (Apple)
- answered:
-Previewing on device is still around! It's incorporated into the preview device picker and now you can preview on-device without ever using a sim :)
-
-
-Kristofer K (Apple)
-  6 days ago
-We talk about it in our most recent session: Build programmatic UI with Xcode Previews
-Apple DeveloperApple Developer
-Build programmatic UI with Xcode Previews - WWDC23 - Videos - Apple Developer
-Learn how you can use the #Preview macro on Xcode 15 to quickly iterate on your UI code written in SwiftUI, UIKit, or AppKit. Explore a... (20 kB)
-
-----
-
-@Dennis
- asked:
-The new #Preview doesn't seem to work when you inject an @MainActor @Observable object into the environment of a View.
-```
-@Observable @MainActor final class ViewModel {}
-
-#Preview {
+Chris J (Apple)
+  5 days ago
+An example would be (using the new #Preview syntax):
+````
+#Preview(traits: .sizeThatFitsLayout) {
     ContentView()
-        .environment(ViewModel())
 }
-```
-The preview crashes with the error: "Compiling failed: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context".
-Is that intentional or a bug?
-Also I wanted to say: I love the new previews, it makes everything so much easier and more convenient :)
+````
 
-WWDC Bot
-APP  6 days ago
-@Eliza B (Apple)
- answered:
-Ah, this is because the preview closure is not @MainActor. Please file a feedback about this for us -- it probably should be!
-
-
-Dennis
-  6 days ago
-Alright, will do :slightly_smiling_face: Thanks!
-
-
-Eliza B (Apple)
-  6 days ago
-As a workaround for now, you can be confident that your closure is in fact invoked on the main actor, so you can safely use this new static method on MainActor:
-```
-static func assumeIsolated<T>(
-    _ operation: @MainActor () throws -> T,
-    file: StaticString = #fileID,
-    line: UInt = #line
-) rethrows -> T
-```
-so:
-```
-#Preview {
-   MainActor.assumeIsolated {
-      ContentView().environment(ViewModel())
-   }
-}
-```
-
-----
-SwiftUI Q&A session
-----
-
-@Ricky
- asked:
-Is it true that you are adding Paging to scroll views in iOS 17?
-2 replies
-
-WWDC Bot
-APP  6 days ago
-@Curt C (Apple)
- answered:
-Yes! Check out the scrollTargetLayout and scrollTargetBehavior modifiers. They support paging, viewAligned, and even custom alignment.
-Watch “Beyond scroll views” to learn more.
-
-----
-
-@Jason
- asked:
-In iOS 16, we could use `@StateObject` to declare data that a View owns, while `@ObservableObject` was for data injected into a View that the View didn't own, and it was pretty easy to create bindings to a property on either a `@StateObject` or an `@ObservableObject`.
-Now, `@State` takes over the role of @StateObject, but `@Bindable` is what's used if you want to be able to bind to a property on an object. So if a View owns a reference-type source of data (like a view model), but you need to be able to create bindings to that view model's properties, should you use @State or `@Bindable`?
-
-WWDC Bot
-APP  6 days ago
-@Luca B (Apple)
- answered:
-You can can get a Binding from `@State`. `@Bindable` is for all the cases where you need to get a binding, but don’t need to use `@State`.
-
-----
-
-@Andre
- asked:
-Was the DatePicker only added to WatchOS or also to tvOS? I am really missing it on tvOS
-3 replies
-
-WWDC Bot
-APP  6 days ago
-@Franck N (Apple)
- answered:
-Hey Andre, unfortunately DatePicker was only added to watchOS this year.
-Please feel free to file a feedback, describing your use-case if possible.
-
-----
-
-@Jérôme
- asked:
-Is the new operator .`scrollPosition(id:)` intended to actually scroll to a new position? In other words, is `ScrollViewReader` deprecated?
-3 replies
-
-WWDC Bot
-APP  6 days ago
-@Harry L (Apple)
- answered:
-You can use the `scrollPosition(id:)` modifier to accomplish similar kinds of things you can do with the `ScrollViewReader` API and it does additional things that `ScrollViewReader` can't do. But you might still want to use a `ScrollViewReader` for scrolling to views in List and Table. Or if you want more fine grain control over scrolling to nested views within non-lazy stacks.
-
-
-Jérôme
-  6 days ago
-Oh ! `scrollPosition(id:)` doesn’t work at all on List and Table?
-
-BTW, setting the ID to a constant doesn’t seem to work for now. A friend submitted this feedback: FB12257635
-
-----
-
-@Austin
- asked:
-Is generally an anti-pattern to use `GeometryReader` in SwiftUI layouts?
-
-WWDC Bot
-APP  6 days ago
-@Robert M (Apple)
- answered:
-It's worth considering alternatives due to its costs and how it interacts with the view hierarchy, for example GeometryReader takes up all available space. Often there's a more idiomatic way to achieve the results that you want, and the Layout protocol has been added recently https://developer.apple.com/documentation/swiftui/layout
-
-Apple Developer DocumentationApple Developer Documentation
-Layout | Apple Developer Documentation
-A type that defines the geometry of a collection of views. (22 kB)
-https://developer.apple.com/documentation/swiftui/layout
-
-
-Magnus
-  6 days ago
-Costs? Is it expensive to create?
-
-Robert M (Apple)
-  6 days ago
-It's always best to profile your application on all intended devices. Often, it alters the view it's contained in (as it stretches to the available space)
-
-Magnus
-  6 days ago
-Yea I understand the layout behavior of it - I just read the above as it itself was expensive to use
-
-Robert M (Apple)
-  6 days ago
-If a layout change happens, it involves a separate iteration. There's cost involved, and what is expensive ultimately depends on your circumstances. GeometryReader has its use, which is why it's provided, but it's best to consider the more directly applicable SwiftUI idioms first, and, profile!
-
-----
-
-@Aviel
- asked:
-From looking at the expanded `@Observable` macro, it looks like Observation tracks “what is used” but not “who used” (I see nothing about the caller, I expected something like `_enclosingInstance…`).
-Yet when I have 2 views, each using a different var from the same class, only the relevant view is updated (I’m using `_printChanges` to check).
-Does the @Observable class know not to notify the other view of the change? Or does SwiftUI know not to diff the other view? Something else?
-How does it work or what am I missing here?
-
-WWDC Bot
-APP  6 days ago
-@Luca B (Apple)
- answered:
-To give a concrete example: if you have a view A that reads the model.x stored property and view B that reads model.y from the same model instance. If you write only model.y only B would be run again its body.
-Say that A is also reading model.z that is computed property from model.y. If you write .y both A and B will run their body.
-Every individual view keeps track of the properties that is reading and invalidate only when those are changing.
-
-----
-
-@junyao
- asked:
-There doesn't seem to be a good swiping gesture solution for `List` or `ScrollView` in SwiftUI. Either swiping left and right in List doesn't customize the background of the button, etc., or swiping left and right in scrollview using DragGesture conflicts with scrollview gestures, such as stuck and delayed. How is it possible in the Diary app for iOS 17 to swipe to the right to show the Favorites button, and the swipe gesture does not conflict with the vertical gesture for List or scrollview? Or is it implemented in UIKit? Is it also necessary to face and solve these gesture problems in spatial-computing?
-
-WWDC Bot
-APP  6 days ago
-@Haotian Z (Apple)
- answered:
-Hi! You could try use the .swipeActions modifier on the row view to add buttons and customize the background appearance of the button using .tint. Is there a specific goal you want to achieve here?
-
-junyao
-  6 days ago
-Yes. I want to implement swipeAction like iOS 17 Journal app. How can I display icons without tint? Or is this just UIKit? 
-
-I've seen a lot of apps implement swipeAction like the iOS 17 Journal app, showing icons without tint. But when I use SwiftUI, I find that difficult to implement.
-
-Haotian Z (Apple)
-  6 days ago
-Got it! Could you provide a screenshot of what you are referring to? (edited) 
-
-junyao
-  6 days ago
-Sure! As the red circle in the screenshot shows, there is a icon button without tint. (edited) 
-截屏2023-06-07 23.21.47.png
-
-Haotian Z (Apple)
-  6 days ago
-Thanks for the image! That helps us to understand the issue. Right now swipe actions follows platform conventions so it might not be obvious to have a customize swipe button. I would suggest filing a feedback so we could keep track of this feature request!
-
-Haotian Z (Apple)
-  6 days ago
-Also cc 
-@Raj R (Apple)
-
-junyao
-  6 days ago
-Ok, got it. Thank you very much for your explanation.
-
-----
-
-@Simon
- asked:
-Is there anything built into SwiftUI + SwiftData that lets the user reorder items in LazyVGrid and persist that ordering?
-1 reply
-
-WWDC Bot
-APP  6 days ago
-@Curt C (Apple)
- answered:
-You could store information in your model about the ordering to persist it. LazyVGrid doesn't have built in support for reordering.
-
-----
-
-@Dennis
- asked:
-When you access an @Observable object via the @Environment property wrapper, is it possible to create bindings to its properties?
-Using @Bindable doesn't work here, right?
-Example:
-```
-@Observable @MainActor final class MyObservableModel {
-    var name: String = ""
-}
-
-struct ContentView: View {
-    @Environment(MyObservableModel.self) var model
-    
-    var body: some View {
-        TextField("Name", text: $model.name) // Does not compile
+Chris J (Apple)
+  5 days ago
+With the older syntax it would be:
+````
+    static var previews: some View {
+        ContentView()
+            .previewLayout(.sizeThatFits)
     }
-}
-```
+````
 
-WWDC Bot
-APP  6 days ago
-@Daniel D (Apple)
- answered:
-You can derived a @Bindable from your view body in this case
-```
-    var body: some View {
-        @Bindable var model = model // add this line
-        TextField("Name", text: $model.name) // works!
-    }
-```
+Jun
+  5 days ago
+@Chris J (Apple)
+ Thanks for the answer and codes! but I unable to do that.
+How can I resolve these?
+A: My content view still try to fit to screen edges. Xcode 13 Previews renders more compact, not being affected by iPhone bezel size
+B: iPhone bezel is still drawn. it’s space consuming in vertical axis. I could see more view components at a time by stacking them vertically, If bezel were not drawn. (Xcode 13 Previews can do that…)
 
-Paul
-  6 days ago
-Why can’t this happen automatically?
-
-Dennis
-  6 days ago
-Ah, neat trick! Thanks
-
-Aviel
-  6 days ago
-My guess is because @Bindable has extra overhead cost that simple `@Environment` doesn’t maybe?
-
-Paul
-  6 days ago
-caused us some headaches when we were starting out
-
-Daniel D (Apple)
-  6 days ago
-why can’t this happen automatically?
-For that to work, we'll need an API that adds a projectedValue to `@Environment`. If that's something you'd like to see, please file a feedback!
-
-----
-
-@Matthew
- asked:
-Not sure if the SwiftUI team can address, but when I run an AppIntent from a SwiftUI button with the new support, the AppIntent loses the ability to talk to the HomeKit API if I background the app while it’s running — this same code works fine in the background for 10 seconds when run from the Short…
-
-WWDC Bot
-APP  6 days ago
-@Luca B (Apple)
- answered:
-It would be great if you could file a feedback with a repro sample of what you are trying to achieve here so that we can take a look at what is not working.
-
-Matthew
-  6 days ago
-I have filed a feedback:  FB12239247.  I will work on a reproduction scenario tonight
-
-Luca B (Apple)
-  6 days ago
-Thank you! Appreciate you taking the time to do that!
-
-----
-
-@Jan
- asked:
-Hi, I wanted to ask how to change the background colour of Button on macOS. The .tint modifier not work (FB12215240)
-
-
-WWDC Bot
-APP  6 days ago
-@Jason S (Apple)
- answered:
-Hi Jan! Thanks for your question. You can use tint modifier with `buttonStyle(.borderedProminent)` to customize the background color.
-
-Jan
-  6 days ago
-Hi Jason! I wish you were right but that's not the case. Even the Apple code in documentation for Button tint does not work. See attached screenshot and FB12215240
-Screenshot 2023-06-07 at 22.17.33.png
+Chris J (Apple)
+  5 days ago
+just to make sure we are on the same page, are you changing the canvas mode to the selectable like I did in these screenshots?
+2 files
  
+Screenshot 2023-06-08 at 13.29.45.png
 
-Jason S (Apple)
-  6 days ago
-Have you had a chance to try the macOS Sonoma beta? It looks like a bug that's been fixed in that version. And I appreciate the feedback about the documentation!
-Alternatively, you can tint the Button's label. That could look like one of these examples, depending on whether you want to inherit the tint color from ancestor views.
+Jun
+  5 days ago
+@Chris J (Apple)
+ Thank you for your detailed instructions! It can be improved with the combination of sizeThatFits layout & selectable mode:+1::skin-tone-2:
+VStack-ing them still be affected by the iPhone screen height for now in my case but I will try with the options in your answers. thank you!
+
+Chris J (Apple)
+  5 days ago
+Please file feedbacks if you have suggestions for improvements we can make that would enable your use cases
+
+----
+
+@Antoine
+ asked:
+I'm finding it difficult to make SwiftUI previews work consistently.  My MacOS app uses about a dozen models.  However, the backbone of the interaction is with a centralized join table: a list of entries, each of which points to a record on one of the other 11 tables.  To make the view's Preview code work, I need to instantiate all these tables and pass them into the preview provider.  It seems that inevitably I end up giving up on making the preview actually work.  Are there any best-practices for this type of situation?  It's a bit of a drag to instantiate 12 @StateObjects and then use the same .environmentObject() modifiers, in each preview of 100+ different views (and I'm less than halfway done).
+
+WWDC Bot
+@Kevin C (Apple)
+ answered:
+Good question. I think you have the right intuition that trying to recreate all of these data models and State objects might not be worth the effort to make the preview work. My hunch here is that there's probably a way to break up your views into smaller pieces that don't require all of the data models. For example your "root view" (used by your app) could do all of this heavy lifting to load the tables and data. But then, your root view could quickly turn that loaded data into smaller sub-objects / value types that get passed into individual views. This would allow you to preview not the root view but rather the layer of views immediately below that.
+
+----
+
+@Cristina
+ asked:
+Hello! In order to make previews the most useful I use to write mock data but I'm also concerned about that mock data not ending up in the production build, so I developed the practice of putting sample files and sample code inside the Preview Content folder and then surrounding every Preview code with #if DEBUG. Do you think this is a good practice or have a better solution? If you think this is good, can I extend the new #Preview macro to be always only available in debug builds so that I don't have to put the same preprocessor macro in every view as I do now? Thanks!
+
+WWDC Bot
+@Kevin C (Apple)
+ answered:
+Yes, that is currently the best practice if you want to guarantee for sure that it does not show up in your production version. In general the linker does "dead code" stripping and will remove all of your preview providers, but the #if compiler conditional will provide the guarantee.
+Currently the Preview macro is not expandable to automatically include the #if DEBUG, but this area is something that we're still thinking about, so please file a feedback request so we can gather some more use cases. Thanks!
+
+----
+
+@Witold
+ asked:
+Would it be possible for sizeThatFitsLayout to create a more fitting preview for the UIKit views? Right now it matches the screen size.
+E.g. infer the size with Auto Layout (given the device width) or allow to define the size. Something like:
 ```
-Button(action: myAction, label: {
-    Text("Hello")
-        .foregroundStyle(.green)
-})
-
-Button(action: myAction, label: {
-    Text("Hello")
-        .foregroundStyle(.tint)
-})
-.tint(.green)
-```
-
-----
-
-@Sheng
- asked:
-One question for SwiftUI ScrollView:
-What is the best way to get ScrollView's contentOffset? Is below code right way to get the contentOffset?
-Here is the sample code for these two questions.
-```
-struct ContentView: View {
-   let columns = Array(repeating: GridItem(.fixed(100)), count: 10)
-   var body: some View {
-       ScrollView([.horizontal, .vertical], showsIndicators: true) {
-           ZStack {
-               GeometryReader { proxy in
-                   Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self,
-                                          value: proxy.frame(in: .named("scroll")).origin)
-               }
-               LazyVGrid(columns: columns, spacing: 8) {
-                   ForEach(0..<1000, id: \.self) { i in
-                       Text("\(i/columns.count), \(i % columns.count)")
-                   }
-               }
-           }
-       }
-       .coordinateSpace(name: "scroll")
-       .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { offset in
-           print("ScrollView's conentOffset is \(offset)")
-       }
-       .padding()
-   }
-}
-struct ScrollViewOffsetPreferenceKey: PreferenceKey {
-   typealias Value = CGPoint
-   static var defaultValue = CGPoint.zero
-   
-   static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {}
-}
-```
-
-WWDC Bot
-APP  6 days ago
-@Harry L (Apple)
- answered:
-There's not an API that provides you a binding to a CGPoint as a scroll view's content offset. However, there are several new APIs that allow you to transform views based on its relative position within a ScrollView.
-The scrollTransition() API lets you apply customizations like scale, offset, and rotate that change as the view traverses a scroll view's visible region:
-https://developer.apple.com/documentation/swiftui/view/scrolltransition(_:axis:transition:)
-And the visualEffect() API lets you do even more flexible things both inside and outside a scroll view by providing you a geometry proxy and letting you do customizations based on that:
-https://developer.apple.com/documentation/swiftui/view/visualeffect(_:)
-If there are other cases where you'd like to read a scroll view's content offset, please do file feedbacks detailing your request!
-
-----
-
-@Jan
- asked:
-In SwiftUI, Core Data objects conform to ObservableObject, so our views can update automatically when the object changes. For example: `struct DetailView: View { @ObservedObject var item: Item ... }` With Observable replacing ObservableObject/ObservedObject property wrappers, will CoreData objects automatically conform to Observable?
-
-WWDC Bot
-APP  6 days ago
-@Julia V (Apple)
- answered:
-`@Model` macro used to mark SwiftData models automatically provides conformance of the model to `Observable`. This way, the models have the capabilities that you'd expect.
-While SwiftData can coexist with CoreData and connect to the same database, these two worlds don't mix. `NSManagedObject` conforms to `ObservableObject`, and `@Model`-tagged types conform to `Observable`.
-
-Jan
-  6 days ago
-Ok, right now I have to stick with Core Data because my use case (shared database Cloudkit sync) is not supported through SwiftData. Is there a risk ObservableObject / ObservedObject will be deprecated? Because this would break large parts of my app due to the conformance described above
-
-
-Julia V (Apple)
-  6 days ago
-I can suggest discussing this during the SwiftData Q&A session that will happen on Friday @ 2:00 - 3:00 p.m in 
-data-frameworks
-
-Jan
-  6 days ago
-ok, thanks!
-
-Julia V (Apple)
-  6 days ago
-Oh, and you might be interested in the sample project that illustrates the migration: https://developer.apple.com/documentation/SwiftUI/Migrating-from-the-observable-object-protocol-to-the-observable-macro
-
-----
-
-@Artyom
- asked:
-I'm curious about @backDeployed attribute from Swift 5.8
-https://github.com/apple/swift/blame/main/CHANGELOG.md#2023-03-30-xcode-143
-Is it something that cannot be used for new SwiftUI APIs or just was not adopted yet?
-For example .scrollTargetBehavior modifier. It seems like it requires completely new type for parameter hence is not back deployed. Are there any @backDeployed APIs in SwiftUI this year?
-See less
-1 reply
-
-WWDC Bot
-APP  6 days ago
-@Jacob R (Apple)
- answered:
-Only functions and computed properties can be back deployed; anything that relies on new types or system functionality can't be back deployed.
-
-----
-
-@Jérôme
- asked:
-Is there a way to get a `matchedGeometryEffect` working across views from different "view controllers", like during a push/pop transition of NavigationStack or a present/dismiss of a sheet?
-
-WWDC Bot
-APP  6 days ago
-@Curt C (Apple)
- answered:
-A `matchedGeometryEffect` doesn't currently work across most complex container views, like List, NavigationStack, or NavigationSplitView.
-
-
-Curt C (Apple)
-  6 days ago
-I’d definitely appreciate Feedback with specific use cases. This is an area I’d like to improve.
-
-
-Jérôme
-  6 days ago
-@Curt C (Apple)
- use cases are all uses cases addressed by custom transition in UIKIt (aka `UIViewControllerTransitioningDelegate`)
-
-----
-
-@John
- asked:
-(On watchOS,) is it possible to programmatically set the focus to a text field and begin text entry, with dictation as the text input method? The use case I have in mind is in the context of a note-taking app, where I want to reduce as much as possible the required physical interaction to start (and end) taking a note. Presently, that involves launching the app, tapping a text field, and then tapping again on the mic icon to start dictation (and then tapping the done button). Ideally, I'd like to get the entire interaction down to just one or two taps in total (e.g. open the app, then tap to start; or even use an app intent fired from the Apple Watch Ultra's action button to make it simply one physical button press to start; and then read the in-flight text entry to scan for a keyword to commit entry.)
-See less
-2 replies
-
-WWDC Bot
-APP  6 days ago
-@Matthew K (Apple)
- answered:
-TextField always launches to the keyboard first on watchOS, and you can easily get to dictation with the mic button. Keyboard is a wonderful and quick way to enter text, and it's always the preferred input method on watchOS. Please file feedback, explaining your use case, for why you'd want to launch to dictation first.
-
-----
-
-@Alexander
- asked:
-Hi!
-I wonder if there is any performance difference between `.opacity(0)` and `.hidden()`? Also, is there any way to cause call of `onDisappear` on a subview, but preserve its state (for instance, if it's a ScrollView)? Simply removing view from hierarchy does the first, `.opacity(0)` does the second, but I'm struggling to find a way to do both.
-Thanks,
-Alexander
-
-WWDC Bot
-APP  6 days ago
-@Harry L (Apple)
- answered:
-`onDisappear` is tied to the view's lifetime so whenever its called the state inside that view will be reset. So there is no way to achieve saving that state but also calling `onDisappear`. However, you can always lift the state higher than the view and keep the state around yourself.
-
-
-Alexander
-  6 days ago
-I could be mistaking, but `NavigationStack` does exactly what I’m asking: if you navigate off root screen to some subscreen, root screen receives `onDisappear`, but when you’re back all its ScrollViews have same state as before (and also onAppear is called)
-
-
-Alexander
-  6 days ago
-The problem with NavigationStack is that it’s available only on iOS 16+, and unfortunately it’s too buggy to use even on iOS 16 (the simplest example is that NavigationLink doesn’t reliably work in Menu which seems to be fixed in iOS 17, and there are plenty more issues that can’t be worked around)
-
-
-Alexander
-  6 days ago
-@Harry L (Apple)
- sorry for pinging, should I file separate question about that? For the NavigationStack behavior (regarding it saving ScrollView state but calling onAppear /onDisappear for root view when going to subscreen and back), I’ve just double checked this fact and I can provide a sample project and/or video recording that confirms it. (edited) 
-
-
-Harry L (Apple)
-  6 days ago
-I think a feedback detailing your request would be great!
-You are correct that NavigationStack does have that behavior but there is no API that lets you achieve something similar.
-
-----
-
-@Matthew
- asked:
-I have an app that I’m adding CloudKit Sharing support to, using the Core Data+CloudKit integration.  I have an NSManagementObject that I’ve conformed to Transferable using the CKShareTransferRepresentation(exporter:), and that works great for creating new shares.  However, if I later open the ShareLink on an entity that is already shared, I get basically the same view, not the view that shows the existing participants.  Is this expected?  Is there a different control I should use here?
-
-WWDC Bot
-APP  6 days ago
-@Julia V (Apple)
- answered:
-This does not look like expected behavior. Have you filed any feedback on this?
-
-Matthew
-  6 days ago
-I just created FB12262594 -- I had a CloudKit lab earlier, and had other non-SwiftUI related questions that are more urgent for me, but will try to create a reproduction scenario with this tonight or tomorrow
-
-
-Julia V (Apple)
-  6 days ago
-Thank you for filing it!
-
-----
-
-@Jamie
- asked:
-Is there a way for a parent view to communicate with an off screen child inside a Lazy Stack or Grid? I want a child that has been scrolled off screen to know when the parent view has done something and adjust the behavior of its next onAppear, maybe with a boolean flag or something similar.
-1 reply
-
-WWDC Bot
-APP  6 days ago
-@Harry L (Apple)
- answered:
-When the view is scrolled offscreen in a lazy stack, it won't receive updates but you can communicate information by passing the info directly to the view.
-For example, you could have a counter the parent keeps track of and pass the count to the child view. When the view next updates it will receive an up to date value of count.
-Hope that helps!
-
-----
-
-@Luis
- asked:
-Observation seems to bring good performance improvements, as far as I've heard that's due to Observable objects make SwiftUI only recalculate the body of views when observed properties change. But SwiftUI still diffs changes (right?), are there good tips to consider, like if it's better to use many Observable objects vs 1, or If it's ok to nest Observable objects inside Observable objects?
-
-WWDC Bot
-APP  6 days ago
-@Luca B (Apple)
- answered:
-The diffing behavior remains unchanged in that once the view is invalidated we will still run body and avoid invalidating any downstream view that hasn't changed.
-We do support Observable inside Observable and that is perfectly fine, and SwiftUI will track only the instance that you read in body.
-I think it still important for you to consider how to better model your domain and what works best for you specific solution. With these new changes you should be able to have more expressive power in your design but still retain great performances.
-
-----
-
-@Brandon
- asked:
-When transitioning from an `ObservableObject` to the new `Observable` macro, do we still need to use @State for our conforming view models?  Or is that only if we need to write to a property in a model?
-2 replies
-
-WWDC Bot
-APP  6 days ago
-@Daniel D (Apple)
- answered:
-You no longer need to use `@State` for displaying or writing properties of an Observable. I recommend watching the session "Discover Observation in SwiftUI" to learn more.
-
-----
-
-@Johannes
- asked:
-Since MapKit annotation clustering is not yet available for SwiftUI, what is the better approach: using the UIKit solution or building this logic by myself on top of SwiftUI MapKit?
-1 reply
-
-WWDC Bot
-APP  6 days ago
-@Sam L (Apple)
- answered:
-If annotation clustering is a feature you’d require, I’d recommend sticking with the UIKit APIs for now. Please do file a feedback report with your clustering use case though as we use those feedback reports to help inform our future design direction!
-
-----
-
-@Aviel
- asked:
-In the SwiftUI animation talk, Kyle shows the new animation modifier which takes a content to avoid passing the animation down the attribute graph. Like so:
-```
-content
-  .animation(.smooth) { $0.scaleEffect(...) }
-  ```
-Can the same be achieved with extra modifier to cancel the animation after the attribute I wish to animate? Like so:
-```
-content
-  .transaction { $0.animation = nil }
-  .scaleEffect(...)
-  .animation(.smooth)
-  ```
-
-WWDC Bot
-APP  6 days ago
-@Tim D (Apple)
- answered:
-That's right – both approaches control the animation that is set on the transaction at the level of the modifier (`.scaleEffect` in this case).
-The benefit of using the new `.animation(...) { ... }` modifier is that it only impacts the modifiers that you apply within the closure, and passes the original transaction+animation down to the rest of the hierarchy.
-Using a separate `.transaction` modifier to 'reset' the animation would require you to know what the original animation was (unless you know that it should actually be set to nil for the rest of the hierarchy, as in your second code block above).
-
-Aviel
-  6 days ago
-amazing thank you!
-
-----
-
-@Valentin
- asked:
-How does SwiftUI keep track of what properties were used inside a body to invalidate views?
-7 replies
-
-WWDC Bot
-APP  6 days ago
-@Matt R (Apple)
- answered:
-Hi Valentin, great question! There's a lot we could say about that, but I'll try to provide a brief overview:
-In general, SwiftUI will compare the values of the properties stored in your views to detect if those values have changed. If any property of a view changes, the view will update and body will get called. Part of how SwiftUI can perform these checks efficiently is due to SwiftUI views being lightweight structs.
-However, views can also store references to reference-type model objects, such as ObservableObjects or classes using the new `@Observable` macro and protocol. For ObservableObjects, if any published property is set, SwiftUI will update all views depending on it. This is why it's often important for performance to avoid having many views in the same app all reference the same ObservableObject, since they will all get updated regardless of the properties they use.
-With the new `@Observable` API, we're able to improve on that significantly. When a view calls its body property, SwiftUI will record any getter accesses on properties of @Observable instances, and start listening for changes to those specific properties. If any of them change, SwiftUI will reevaluate the dependent views, re-record any property getter accesses that occur during the execution of body, and repeat the process. This ensures that views will only update if their dependent data has changed. We think it will be a big win for performance in most apps compared to ObservableObject!
-
-----
-
-@Austin
- asked:
-Do you have any guidance or code samples on adding and removing child SwiftUI views as part of a UIKit view hierarchy? As opposed to the an entire view controller being a UIHostingController.
-I've run into issues removing SwiftUI child views from the UIKit hierarchy, where the SwiftUI view couldn't just dismiss itself since it's not composed in another SwiftUI view.
-
-WWDC Bot
-APP  6 days ago
-@Curt C (Apple)
- answered:
-SwiftUI views inside a UIKit hierarchy must be inside a UIHostingController or part of a UIHostingConfiguration. Those types provide the necessary infrastructure to maintain/update the SwiftUI views.
-
-----
-
-@Kiril
- asked:
-There's a fairly well known "flow layout" which can be described like this: it puts components in a row, sized to their preferred size. If the remaining horizontal space on the same row is too small to put the next component, the component is then shifted to the next row.
-What would be the best way to achieve something similar in SwiftUI? Thanks in advance
-See less
-2 replies
-
-WWDC Bot
-APP  6 days ago
-@Jacob R (Apple)
- answered:
-The rough way for doing this would be to implement a custom layout conforming to Layout. Let's say you are implementing a horizontal flow you'd then use HStackLayout inside your implementation to measure and check each row.
-* Propose a size to each child (nil width) to get back it's ideal width. Use this to determine how many of the children will be in the current row.
-* Once we have a row we can use HStackLayout to stretch and place them.
-* We now continue to the next row and we stop once all children has been consumed.
-
-----
-
-@Jan
- asked:
-Hi, I wanted to ask how to remove row insets in List on macOS. I was not able to do this (FB12223245)
-1 reply
-
-WWDC Bot
-APP  6 days ago
-@Haotian Z (Apple)
- answered:
-Hi! Thanks for filing a feedback. The `listRowInsets` modifier is mostly to control layout within the `List`, so to use it to align with other elements in `VStack` might not give desired results. We will further look into the feedback and follow up with you through that channel, thank you!
-
-----
-
-@Jordan
- asked:
-I have a UIKit Mac Catalyst app with a custom-built inspector sidebar. I use a UISplitViewController to get a primary sidebar, then I embed 2 view controllers into the secondary column - the content and the inspector sidebar, then I added an NSToolbar button to toggle the inspector visibility. New this year is an inspector API but it's only available in SwiftUI. Do you think I can migrate to this new API with this setup? For now I’ll need to keep the UIKit split view controller. I could modify its children to be a UIHostingController containing SwiftUI, or I could maybe put the split view controller into a SwiftUI view and then embed that into a hosting controller to be the root view controller? Would any of this work or would I need to replace my entire layout top-down with SwiftUI?
-See less
-3 replies
-
-WWDC Bot
-APP  6 days ago
-@Nick T (Apple)
- answered:
-Thanks for this great question. We've designed inspector to be able to work for use cases like these. Depending on your desired appearance (under toolbar or full-height, see this year's session for a discussion of those: https://developer.apple.com/wwdc23/10161) you may have some extra work to do.
-For full-height your proposal of putting the UISVC into a SwiftUI View and then adding .inspector after that should just work.
-For an under toolbar appearance, you should be able to use .inspector on the detail view controller (after wrapping it in a SwiftUI view), but you may have to do manual toolbar management here (hiding and showing) to make sure you don't end up with stacked toolbars/UINavigationBars
-
-----
-
-@Alexander
- asked:
-Is there an easy way to decide on a view contents based on space available? For instance, I have two buttons, first has icon + text in label, and second has just text. They are put in HStack and I want to remove text on a first button (leave just its icon) if one or both labels are going to be truncated.
-For now to achieve this behavior I have to build monstrous constructions which involve hidden "probe" button instances and geometry readers to determine "preferred" text length by placing it in `Group { label }.frame(width: 1000).frame(width: 0)` where first .frame gives enough space for text to render and second .frame shrinks our "probe" Group to prevent it affecting overall layout.
-See less
-:white_check_mark:
-
-3 replies
-
-WWDC Bot
-APP  6 days ago
-@Jake S (Apple)
- answered:
-That's a great question! ViewThatFits might be a good solution to this. It allows SwiftUI to pick from a few possible Views according to which is appropriate for the available space.
-You can see more about it here: https://developer.apple.com/documentation/swiftui/viewthatfits
-Apple Developer DocumentationApple Developer Documentation
-ViewThatFits | Apple Developer Documentation
-A view that adapts to the available space by providing the first child view that fits. (22 kB)
-https://developer.apple.com/documentation/swiftui/viewthatfits
-
-
-One example of how to do something like you described could look like this:
-```
-struct ContentView: View {
-    var body: some View {
-        HStack {
-            Button(action: {}, label: {
-                ViewThatFits {
-                    Label(title: {Text("Hello")}, icon:
-                            {Image(systemName:"info")})
-                    Text("Hello")
-                }
-            })
-            Button(action: {}, label: {
-                Text("World")
-            })
-        }
-    }
-}
-```
-Does this solve the issue that you're describing?
-
-
-Alexander
-  6 days ago
-Wow, what a cool new view I missed, thank you!
-
-----
-
-@Vanderlei
- asked:
-Hello. from macOS 13.1 beta 4 to macOS 13.2, `NavigationStack` animations (when using animated binding) worked for both view insertion and view removal. The animation feature is documented in the macOS release notes. Since macOS 13.3 beta 1 animation only appears to work on view removal. It still does…
-See more
-8 replies
-
-WWDC Bot
-APP  6 days ago
-@Nick T (Apple)
- answered:
-This is not by design. Can you drop your feedback number in here?
-
-
-Vanderlei
-  6 days ago
-For sure. The number is FB12061269. Thank you!
-
-
-Nick T (Apple)
-  6 days ago
-Hm, I've actually added some information to that particular feedback already. I really appreciated that bug! It boiled down to some unexpected ordering using an .onChange modifier. I expected that to have been fixed in latest 13 betas as well as 14. Let me check on that behavior and release alignment.
-
-
-Vanderlei
-  6 days ago
-That’s great. I’ll keep following. Thank you once again.
-
-
-Nick T (Apple)
-  6 days ago
-Hi Vanderlei, something is getting lost in the animation plumbing of your use case:
-```
-struct ContentView: View {
-    @State private var path = [Path]()
-
-    private var animatedPath: Binding<[Path]> {
-        .init(
-            get: {
-                withAnimation(.easeInOut(duration: 5)) {
-                    $path.wrappedValue
-                }
-            },
-            set: { value in
-                withAnimation(.easeInOut(duration: 5)) {
-                    $path.wrappedValue = value
-                }
-            }
-        )
-    }
-
-    var body: some View {
-        NavigationStack(path: animatedPath) {
-            MainView()
-                .navigationDestination(for: Path.self) {
-                    switch $0 {
-                    case .detail:
-                        DetailView(path: animatedPath)
-                    }
-                }
-        }
-    }
-}
-```
-I've undup'ed your feedback and will need to hold onto it for a while longer. Does specifying your animation like this instead solve your use case
-```
-struct ContentView: View {
-    @State private var path = [Path]()
-
-    var body: some View {
-        NavigationStack(path: $path.animation(.easeInOut(duration: 5))) {
-            MainView()
-                .navigationDestination(for: Path.self) {
-                    switch $0 {
-                    case .detail:
-                        DetailView(path: animatedPath)
-                    }
-                }
-        }
-    }
+#Preview("Cell", traits: .sizeThatFitsLayout) {
+    let cell = UITableViewCell()
+    var grouped = UIListContentConfiguration.groupedFooter()
+    grouped.text  = "hello hello"
+    cell.contentConfiguration = grouped
+
+    cell.frame.size = cell.systemLayoutSizeFitting(
+        CGSize(width: UIScreen.main.bounds.width, height: 0),
+        withHorizontalFittingPriority: .required,
+        verticalFittingPriority: .fittingSizeLevel
+    )
+
+    return cell
 }
 ```
 
-Vanderlei
-  6 days ago
-This worked! :slightly_smiling_face: (On macOS 14 beta 1, I will try on macOS 13 as well.)
-
-
-Nick T (Apple)
-  6 days ago
-:partying_face: For efficiency reasons, the latter is the better construction because get/set Bindings can't be compared for equality as efficiently as non-`get/set` Bindings. But if you do need the super fined grain control of a different animation per `get/set` that may also be changing, I could see how you have to use that construction.
-
-
-Vanderlei
-  6 days ago
-For now, I needed the animated “push” and “pop” effect, no fined grain control needed. I can confirm this way worked on Ventura 13.4 as well. :slightly_smiling_face:  What’s is strange is that former construction worked before, but the new way is even more cleaner. (edited) 
-
-----
-
-@Anton
- asked:
- ```
-@Observable @MainActor final class SomeModel {}
-struct ContentView: View {
-   let model = SomeModel() // Doesn't work
-   var body: some View {...}
-}
-```
-How to run an @Observable class on the MainActor?
-
-2 replies
-
-WWDC Bot
-APP  6 days ago
-@Daniel D (Apple)
+@Kevin C (Apple)
  answered:
-Since you annotated your model @MainActor, you'll need the same annotation on the parent scope per Swift concurrency rules.
-```
-@MainActor // <====
-struct ContentView: View {
-  var model = SomeModel() // should work now!
-}
-```
+Ah, look like there is a bug with .sizeThatFitsLayout for UIKit, it should be a smaller size when in the Selectable / Static mode of the canvas, but we're seeing it's not too. Please file a Feedback request for us!
 
 ----
 
-@Sam
- asked:
-Is there a way to wrap text around some other view? Something similar to a dropcap effect
-:heart:
 
-WWDC Bot
-APP  6 days ago
-@Jacob R (Apple)
- answered:
-This is not supported in SwiftUI. You'll have to use UIKit / AppKit to do something like this via exclusion paths.
-
-----
-
-@Andreas
- asked:
-I have a bottom sheet with scrollable content in my app, similar like the one in Apple Maps. In some conditions, e. g. when the sheet is fully presented and the scroll offset is 0, I would like, that you can only scroll in one direction.
-At the moment, I use `gestureRecognizerShouldBegin` of `UIScrollView` in an `UIViewRepresentable` for that.
-But I would like, to accomplish that just with SwiftUI. Unfortunately ScrollTargetBehavior is only called, when a scroll gesture ends. Is there something similar, for when a scroll gesture starts? Or do you have other ideas, to achieve that behavior?
-
-WWDC Bot
-APP  6 days ago
-@Harry L (Apple)
- answered:
-I dont believe this is possible at the moment but a feedback detailing your request would be appreciated!
-
-----
-
-@Jérôme
- asked:
-Is there a way to programmaticaly control the progress of an animation in SwiftUI? A kind of UIViewPropertyAnimator but for SwiftUI?
-
-@Tim D (Apple)
- answered:
-There is not a tool directly analogous to UIViewPropertyAnimator, but there are a few different approaches that you can use depending on the situation.
-One new API this year is KeyframeTimeline, which lets you directly compute keyframe-driven interpolated values for a time that you specify, which you can then apply to the view using modifiers. You could drive this using a gesture, or any other source of 'animation progress.'
-
-Jérôme
-  6 days ago
-@Tim D (Apple)
- I don’t see how to update the progress of the animation based on a gesture. Is this covered in a session?
-
-Tim D (Apple)
-  6 days ago
-It's briefly covered in "Wind your way through advanced animations in SwiftUI."
-If you create a KeyframeTimeline:
-```
-let myKeyframes = KeyframeTimeline(initialValue: 0.0) {
-    CubicKeyframe(17.0, duration: 1.0)
-    CubicKeyframe(-24.0, duration: 1.0)
-    CubicKeyframe(0, duration: 1.0)
-}
-```
-You can manually compute a value for a specific progress like this:
-`let interpolatedValue = myKeyframes.value(progress: 0.3)`
-...which you could then use to update the view.
-
-
-Jérôme
-  6 days ago
-In a TimelineView for example?
-
-
-Tim D (Apple)
-  6 days ago
-Yes, you could use a TimelineView if you want to update based on time. Or, if it's gesture-driven, you could use a gesture-controlled @State property in your view as a way to compute progress.
-
-
-Jérôme
-  6 days ago
-Ok I see, but this works for explicit animations only right? There’s nothing to control an implicit appear/disappear transition for example?
-
-
-Tim D (Apple)
-  6 days ago
-That's right. If you'd like to drive transition progress programmatically, I'd love to hear more about your specific use case. A feedback would be greatly appreciated! (and you can mention this thread)
-
-----
-
-@Anton
- asked:
-In SwiftUI there is a PropertWrapper to write and read `UserDefaults`. Is there something similar for KeyChain?
-2 replies
-
-WWDC Bot
-APP  6 days ago
-@Jeff R (Apple)
- answered:
-Hi - thanks for your question! This isn't something that we have API for at the moment. A feedback for it, along with any information you can provide about your use case would definitely be appreciated.
-
-Stan
-  6 days ago
-I recently saw this, which may be helpful https://medium.com/@ihamadfuad/swiftui-keychain-as-property-wrapper-ca60812e0e5e
-
-----
-
-@Jamie
- asked:
-What is the best way to know if a child view has been scrolled off screen as opposed to the parent view being taken off screen? (Basically different causes for `onDisappear`.) The best I've been able to find so far is using a `GeometryReader` and checking to see if the child view's geometry is within the parent's.
-
-WWDC Bot
-APP  6 days ago
-@Harry L (Apple)
- answered:
-You could maybe use the new `scrollPosition(id:)` modifier though that won't give you the state of every currently visible view.
-Using the GeometryReader is probably the best solution if you really want to care about only the visible region.
-
-----
-
-Just out of pure curiosity why do we have a ForEach loop for views and for loop for everything else?
