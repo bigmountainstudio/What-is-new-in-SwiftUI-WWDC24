@@ -21,27 +21,21 @@ So we should just focus on @State and @Environment going forward, correct? (edit
 
 
 Cristian-Mihai
-  
 What happens if an attribute is modified, but indirectly? For example, in the case of using get & set. Would the view still update automatically? (edited) 
 
 
 Matthew
-  
-...and @Environment, to handle what iOS 16 and prior uses both @Environment and @EnvironmentObject for?
-
+...and `@Environment`, to handle what iOS 16 and prior uses both `@Environment` and `@EnvironmentObject` for?
 
 francisco
-  
-i love the new @Observable macro
+I love the new `@Observable` macro
 :raised_hands:
 1
 :heavy_plus_sign:
 2
 
 
-
 Curt C (Apple)
-  
 SwiftUI registers dependencies is a value is read during the evaluation of body. Indirect modifications should invalidate the dependencies.
 
 ----
@@ -1563,18 +1557,14 @@ APP
  answered:
 With SwiftData you should configure a model container in the environment of your view in the preview.
 
-Charles A (Apple)
-  
 You would do this using the modelContainer modifier, specifying true for the inMemory parameter.
 :raised_hands:
 3
 
 Jan
-  
 Thank you. It comes with this parameter predefined in one of the inits?
 
 Charles A (Apple)
-  
 It's a parameter to the modelContainer View modifier. So more complete code might look like this:
 ```
 #Preview {
@@ -1636,7 +1626,7 @@ There's a lot of different project structures, so I could also accidentally mist
 
 @Naftali
  asked:
-When adding in coredata/ swiftdata to previes, even with adding a preview container, everytime it will be recreating the data, I would love for it to work the way app preview does, where the data stays the (somewhat) persists
+When adding in coredata/ swiftdata to previews, even with adding a preview container, everytime it will be recreating the data, I would love for it to work the way app preview does, where the data stays the (somewhat) persists.
 4 replies
 
 WWDC Bot
@@ -1648,18 +1638,11 @@ Filing feedback with the Feedback Assistant is a great way to let us know what y
 1
 
 Charles A (Apple)
-  
 Having said that, the data in a preview can be persisted.
 
+If you setup an `NSPersistentContainer` that uses an on disk persistence strategy, it should be persisted. The challenge will be clearing that data store if you need to migrate the schema or reset the data. (edited) 
 
-Charles A (Apple)
-  
-If you setup an NSPersistentContainer that uses an on disk persistence strategy, it should be persisted. The challenge will be clearing that data store if you need to migrate the schema or reset the data. (edited) 
-
-
-Charles A (Apple)
-  
-(the same is true for SwiftData, where you can use a modelContainer view modifier to create a container that will persist to disk)
+(The same is true for SwiftData, where you can use a `modelContainer` view modifier to create a container that will persist to disk.)
 
 ----
 
@@ -2182,14 +2165,14 @@ Ok, got it. Thank you very much for your explanation.
 
 @Simon
  asked:
-Is there anything built into SwiftUI + SwiftData that lets the user reorder items in LazyVGrid and persist that ordering?
+Is there anything built into SwiftUI + SwiftData that lets the user reorder items in `LazyVGrid` and persist that ordering?
 1 reply
 
 WWDC Bot
 APP  
 @Curt C (Apple)
  answered:
-You could store information in your model about the ordering to persist it. LazyVGrid doesn't have built in support for reordering.
+You could store information in your model about the ordering to persist it. `LazyVGrid` doesn't have built in support for reordering.
 
 ----
 
@@ -2395,16 +2378,14 @@ WWDC Bot
 APP  
 @Julia V (Apple)
  answered:
-@Model macro used to mark SwiftData models automatically provides conformance of the model to Observable. This way, the models have the capabilities that you'd expect.
-While SwiftData can coexist with CoreData and connect to the same database, these two worlds don't mix. NSManagedObject conforms to ObservableObject, and @Model-tagged types conform to Observable.
+`@Model` macro used to mark SwiftData models automatically provides conformance of the model to Observable. This way, the models have the capabilities that you'd expect.
+While SwiftData can coexist with CoreData and connect to the same database, these two worlds don't mix. `NSManagedObject` conforms to `ObservableObject`, and `@Model`-tagged types conform to `Observable`.
 See less
 
 Jan
-  
 Ok, right now I have to stick with Core Data because my use case (shared database Cloudkit sync) is not supported through SwiftData. Is there a risk ObservableObject / ObservedObject will be deprecated? Because this would break large parts of my app due to the conformance described above
 
 Julia V (Apple)
-  
 I can suggest discussing this during the SwiftData Q&A session that will happen on Friday @ 2:00 - 3:00 p.m in 
 data-frameworks
 :+1:
@@ -2417,7 +2398,6 @@ ok, thanks!
 1
 
 Julia V (Apple)
-  
 Oh, and you might be interested in the sample project that illustrates the migration: https://developer.apple.com/documentation/SwiftUI/Migrating-from-the-observable-object-protocol-to-the-observable-macro
 
 ----

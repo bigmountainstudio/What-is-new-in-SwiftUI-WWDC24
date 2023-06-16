@@ -525,11 +525,9 @@ From the demos it looks like using persistent history to coordinate between apps
 Yes, SwiftData automatically turns on persistent history tracking
 
 Kevin
-  
 So I assume that means changes in extension are merged into the main application and vice-versa and transaction history are intelligently deleted.
 
 Rishi V (Apple)
-  
 Indeed the remote changes will be used by the main application to consume the changes
 
 ----
@@ -540,8 +538,8 @@ Does SwiftData support SUBQUERY()? And how about derived attributes?
 
 @Jeremy S (Apple)
  answered:
-Yes! You can use #Predicate to create predicates to use for your fetch queries which can include operations like calling .filter(:) on collections, which is supported with SwiftData. If there are additional operations you'd like to support in your predicates with SwiftData that you don't see supported, feel free to send us a feedback request!
-However, derived attributes like in CoreData are not supported. You can write a computed property and label it with the @Transient attribute instead which may help but not quite the same as CoreData's derived attributes.
+Yes! You can use `#Predicate` to create predicates to use for your fetch queries which can include operations like calling .filter(:) on collections, which is supported with SwiftData. If there are additional operations you'd like to support in your predicates with SwiftData that you don't see supported, feel free to send us a feedback request!
+However, derived attributes like in CoreData are not supported. You can write a computed property and label it with the `@Transient` attribute instead which may help but not quite the same as CoreData's derived attributes.
 
 ----
 
@@ -1498,17 +1496,15 @@ APP
 @Nick G (Apple)
  answered:
 There are a few options:
-1. Manually create an object graph, as you say
-2. Use an in-project store file to hold a representative data graph you want to work with in your preview
-3. Interact with your previews to configure data in an in-memory store
+1. Manually create an object graph, as you say.
+2. Use an in-project store file to hold a representative data graph you want to work with in your preview.
+3. Interact with your previews to configure data in an in-memory store.
 
 Douglas
-  
 For option 1, does manually creating the object graph require passing around the ModelContext or is there a way to just treat models as plain old swift objects? (edited) 
 
 
 Nick G (Apple)
-  
 Models can exist outside (not bound to) a context, but they are not persistent.
 
 ----
@@ -1821,7 +1817,7 @@ Please file a feedback request. You can ask the ModelContext if its in the colle
 
 @Douglas
  asked:
-Is the @Relationship property wrapper required for any property whose type is a SwiftData @model or is it just needed when you want to specify @Relationship-specific behavior like .cascade?
+Is the @Relationship property wrapper required for any property whose type is a SwiftData `@Model` or is it just needed when you want to specify @Relationship-specific behavior like .cascade?
 
 1 reply
 
@@ -1912,41 +1908,34 @@ Indeed you can setup the ModelContainer with multiple ModelConfigurations, howev
 
 
 Aidan
-  
-yeah. So you can’t create relationships between models that span boundaries between stores?
+Yeah. So you can’t create relationships between models that span boundaries between stores?
 
 
 Rishi V (Apple)
-  
-That is correct
+That is correct.
 
 
 Aidan
-  
 Ok thanks. While that makes sense, it’s kind of a bummer.
 
 
 Aidan
-  
 Thank you for your response!
 
 
 Leon
-  
 Is this likely to be a feature for a later release?
 I suppose the only way to achieve inMemory ‘Only’ entities is mark all attributes as Transient? (somehow this is a question :))
 
 
 Rishi V (Apple)
-  
-The in-memory entity could not be related to other entities, then it could exist in an configuration by itself
+The in-memory entity could not be related to other entities, then it could exist in an configuration by itself.
 
 ----
 
 @John
  asked:
 I want to build a collection of SwiftUI apps that share access to the same CoreData (and CloudKit) stack. I want to ensure the CoreData Schema is consistent across the apps, so I plan to break out the CoreData Schema into a swift framework that is shared among the apps. Would I be able to use SwiftData with this use case, and are there any limitations?
-
 1 reply
 
 WWDC Bot
@@ -1986,7 +1975,7 @@ There should be no blockage on the mainUI thread, please file a feedback report 
 
 @Nico
  asked:
-What’s the recommended approach to use SwiftData in UIKit if I previously have used NSFetchedResultsController or should I continue using Core Data for now?
+What’s the recommended approach to use SwiftData in UIKit if I previously have used `NSFetchedResultsController` or should I continue using Core Data for now?
 :thinking_face:
 1
 
@@ -1996,7 +1985,7 @@ WWDC Bot
 APP  
 @Rishi V (Apple)
  answered:
-Use SwiftData with UIKit can be used with the ModelContext's .fetch() and tailoring the results with a FetchDescriptor.
+Use SwiftData with UIKit can be used with the ModelContext's `.fetch()` and tailoring the results with a `FetchDescriptor`.
 
 ----
 
@@ -2038,43 +2027,32 @@ https://feedbackassistant.apple.com
 
 
 Austen
-  
 Batch support would indeed be awesome.
 
 
 Brendan
-  
 I have to chime in and say that I love that SwiftData can co-exist with Core Data so we can do some complex things like batch inserts still in Core Data and use SwiftData to drive the UI.
 
 
 Leon
-  
 So currently no support?
-Will attempt with .insert / . update for now and report how we get on with the larger datasets.
+Will attempt with .insert / .update for now and report how we get on with the larger datasets.
 Any ideas on the process.
 Create context with autosave disabled
 Obtain batch data and insert/update
 Save context to persistent storage
 SwiftUI/data to propagate throughout UI modelContext
-
-
-Leon
   
 @Brendan
-,
 Are you saying we can use SwiftData for UI operations while managing batchInserts via CoreData APIs?
 All in the same SQLite instance?
 
-
 Brendan
-  
 Yes because Core Data and SwiftData can share the same store. You’d just have to fault in the updated objects into SwiftData if you updated the store from Core Data.
 
-
 Leon
-  
 Looks like we can batchInsert from SwiftData (pulled from another question):
-ModelContext insert(_ batch: [[String: Any]], model: any PersistentModel.Type) (edited) 
+ModelContext `insert(_ batch: [[String: Any]], model: any PersistentModel.Type)` (edited) 
 
 ----
 
@@ -2087,7 +2065,7 @@ WWDC Bot
 APP  
 @Rishi V (Apple)
  answered:
-Setup the container in your application's initializer and then pass that container to the modelContainer modifier
+Set up the container in your application's initializer and then pass that container to the modelContainer modifier.
 
 ----
 
@@ -2106,7 +2084,7 @@ The same restrictions apply, please file a feedback report with your use case if
 
 @Keith
  asked:
-When syncing with CloudKit how do I dedupe data? Can I still register for NSPersistentStoreRemoteChange notifications and fetch the history as with Core Data?
+When syncing with CloudKit how do I dedupe data? Can I still register for `NSPersistentStoreRemoteChange` notifications and fetch the history as with Core Data?
 3 replies
 
 WWDC Bot
@@ -2124,14 +2102,13 @@ Thanks
 
 
 Rishi V (Apple)
-  
 That is correct
 
 ----
 
 @Deeje
  asked:
-I have my own coredata/cloudkit sync engine, and use coredata everywhere.  Can I migrate to SwiftData but configure its stack such that my sync engines still works?
+I have my own Core Data/CloudKit sync engine, and use Core Data everywhere.  Can I migrate to SwiftData but configure its stack such that my sync engines still works?
 1 reply
 
 WWDC Bot
@@ -2144,7 +2121,7 @@ Yes. Pass nil for CloudKit container identifier. There is currently a bug for th
 
 @James
  asked:
-In one of the SwiftData videos, the code showed a container configured with a CloudKit container identifier. But in an earlier Q&A period, someone asked if SwiftData can be used with CloudKit public, private, and shared containers and the answer was that you would need to use NSPersistentCloudKitContainer and CoreData co-existing with SwiftData.
+In one of the SwiftData videos, the code showed a container configured with a CloudKit container identifier. But in an earlier Q&A period, someone asked if SwiftData can be used with CloudKit public, private, and shared containers and the answer was that you would need to use `NSPersistentCloudKitContainer` and CoreData co-existing with SwiftData.
 What CloudKit things does SwiftData support, and what doesn't it support? And is there a document that explains this? Thank you.
 See less
 1 reply
@@ -2159,7 +2136,7 @@ ModelContainer supports the private database but the public and shared database 
 
 @Michel
  asked:
-My models are both @Model and Codable. Alas, I seem to have an issue with this, where I get ambiguous use of getValue and setValue. Known? Known workaround?
+My models are both `@Model` and `Codable`. Alas, I seem to have an issue with this, where I get ambiguous use of getValue and setValue. Known? Known workaround?
 
 
 WWDC Bot
@@ -2195,9 +2172,7 @@ APP
  answered:
 That is unexpected, please file a feedback report with your configuration included!
 
-
 Bryan
-  
 The issue is in the Preview macro. You can get it to work using the older PreviewProvider.
 
 ----
