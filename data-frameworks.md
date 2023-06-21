@@ -75,8 +75,7 @@ Will do :+1::skin-tone-3:
 
 @Matthew
  asked:
-Does SwiftData have the capability to run fetch on updates in the View Model of a MVVM architecture?  Most VM objects provide data prepping for the view/swiftUI struct view and swiftData might not be able to support MVVM?  As a conversation topic SwiftData might eliminate View Models? Maybe MVVM archi…
-See more
+Does SwiftData have the capability to run fetch on updates in the View Model of a MVVM architecture?  Most VM objects provide data prepping for the view/swiftUI struct view and swiftData might not be able to support MVVM?  As a conversation topic SwiftData might eliminate View Models? Maybe MVVM architectures are becoming obsolete due to the nature of swiftUI’s temp struct views?
 :heart:
 1
 :-1:
@@ -100,13 +99,12 @@ There’s an awesome video on observation named Discover Observation in SwiftUI 
 
 Matthew
   
-Just to clarify, SwiftData is not intended to run outside of the SwiftUI Observation.  I’m kind-of thinking View Models are obviously not needed.  Which makes sense since “struct-view” is refreshed and reloaded on change.
+Just to clarify, SwiftData is not intended to run outside of the SwiftUI Observation.  I’m kind of thinking View Models are obviously not needed. Which makes sense since “struct-view” is refreshed and reloaded on change.
 
 -----
 @Simon
  asked:
-Hi, we have multiple apps that have severel 100k of database entries. Our first tests, with your WWDC23 demo project, show that writing as well as reading takes very long, at least some 6-7 seconds and consumes lots of memory on an iPhone 11 Pro (our reference device). Is this the performance we hav…
-See more
+Hi, we have multiple apps that have several 100k of database entries. Our first tests, with your WWDC23 demo project, show that writing as well as reading takes very long, at least some 6-7 seconds and consumes lots of memory on an iPhone 11 Pro (our reference device). Is this the performance we have to expect from SwiftData? Can we improve this to come at least under 1 second?
 :eyes:
 2
 
@@ -162,18 +160,12 @@ WWDC Bot
 APP  
 @Nick G (Apple)
  answered:
-Yes, but only via co-existence. ModelConfiguration doesn't know how to express the capabilities of NSPersistentCloudKitConfiguration. You should file an enhancement request for that.
-Today you will need an NSPersistentCloudKitContainer on the side to manage the store descriptions, mirroring, and shar…
-See more
-Apple DeveloperApple Developer
-Migrate to SwiftData - WWDC23 - Videos - Apple Developer
-Discover how you can start using SwiftData in your apps. We'll show you how to use Xcode to generate model classes from your existing... (13 kB)
-https://developer.apple.com/videos/play/wwdc2023/10189
-
-Apple Developer DocumentationApple Developer Documentation
-Adopting SwiftData for a Core Data app | Apple Developer Documentation
-Persist data in your app intuitively with the Swift native persistence framework. (22 kB)
-https://developer.apple.com/documentation/coredata/adopting_swiftdata_for_a_core_data_app
+Yes, but only via co-existence. `ModelConfiguration` doesn't know how to express the capabilities of `NSPersistentCloudKitConfiguration`. You should file an enhancement request for that.
+Today you will need an `NSPersistentCloudKitContainer` on the side to manage the store descriptions, mirroring, and sharing API invocations via CoreData objects (NSManagedObject, etc).
+Your application can still use SwiftUI + SwiftData to manage its data, but via a non-syncing ModelConfiguration to the same store file.
+These sessions and documents will be informative:
+Migrate to SwiftData - https://developer.apple.com/videos/play/wwdc2023/10189
+Adopting SwiftData for a Core Data App - https://developer.apple.com/documentation/coredata/adopting_swiftdata_for_a_core_data_app
 
 ----
 
@@ -1303,8 +1295,7 @@ The pending changes will remain in the context until you call save explicitly, o
 
 @Nico
  asked:
-Is there a way to use SwiftData without automatic iCloud sync? I’d like to do that manually using my own CloudKit solution or CKSyncEngine. SwiftData automatically picks up any CloudKit containers though and I have not seen an option to disable this behavior. Setting cloudKitContainerIdentifier to n…
-See more
+Is there a way to use SwiftData without automatic iCloud sync? I’d like to do that manually using my own CloudKit solution or CKSyncEngine. SwiftData automatically picks up any CloudKit containers though and I have not seen an option to disable this behavior. Setting cloudKitContainerIdentifier to nil does still pick the first available CloudKit container.
 :eyes:
 1
 
@@ -1336,8 +1327,7 @@ They will, although there are some known issues in seed 1.
 
 @William
  asked:
-Does SwiftData handle the URLSession, CoreData, and persistence?  I guess I’m confused about what all SwiftData can handle.    I look at theLoadingAndDisplayingALargeDataFeed  and do not consider that large data.  I need to handle JSON data from several sites and wondered if SwiftData is able to handle t…
-See more
+Does SwiftData handle the URLSession, CoreData, and persistence?  I guess I’m confused about what all SwiftData can handle.    I look at theLoadingAndDisplayingALargeDataFeed  and do not consider that large data.  I need to handle JSON data from several sites and wondered if SwiftData is able to handle that kind of backend data?
 2 replies
 
 WWDC Bot
@@ -1423,8 +1413,7 @@ WWDC Bot
 APP  
 @Jeremy S (Apple)
  answered:
-I think the answer to this will depend on which expressions you're looking to support, so feel free to clarify or ask in the thread about specific expressions. But predicates with SwiftData do not currently have explicit support for some of the mathematical/statistical values such as min/max - feel…
-See more
+I think the answer to this will depend on which expressions you're looking to support, so feel free to clarify or ask in the thread about specific expressions. But predicates with SwiftData do not currently have explicit support for some of the mathematical/statistical values such as min/max - feel free to file a feedback about those if you'd like to see them added!
 
 
 Jeremy S (Apple)
@@ -1469,8 +1458,8 @@ Yes, you can create a ModelContainer using multiple ModelConfigurations similarl
 
 @Matthew
  asked:
-Coexisting scenarios:  The ‘Migrate to Swift Data’ presentation indicates that I need to be sure to used Schema Versioning for using both CoreData and SwiftData, and it refers to the Modeling with Swift Data presentation.  This makes sense from the SwiftData perspective, but I do I need to also make s…
-See more
+Coexisting scenarios:  The ‘Migrate to Swift Data’ presentation indicates that I need to be sure to used Schema Versioning for using both CoreData and SwiftData, and it refers to the Modeling with Swift Data presentation.  This makes sense from the SwiftData perspective, but I do I need to also make sure to version my CoreData model in exactly the same way?  
+In other words, with CoreData alone, I can generally just add a new optional field to a model object without creating a new version, but is this something I can no longer do?
 2 replies
 
 WWDC Bot
@@ -1569,10 +1558,13 @@ Not at this time.  Please file a feedback request.
 @Aidan
  asked:
 Is it silly to do something like this?
-Predicate { _ in true }
+`#Predicate { _ in true }`
 I know you don't need this for FetchDescriptor, but I wonder would there ever be a legitimate use case for this? Maybe if you wanted to have an array pf Predicates that you could choose from? This currently raises a runtime exception:
-Exc…
-See more
+```
+Exception    
+NSException 
+*    "Unable to parse the format string \"YES\""
+```
 :eyes:
 1
 
@@ -1634,8 +1626,7 @@ There are some known issues in seed 1 of SwiftData. Please file a feedback repor
 
 @David
  asked:
-Did I hear it right that inserting an object with a unique constraint will upsert it automatically? What if you have a partially populated model? For instance my API returns a profile with an id and name, but I already have a version of that profile with all of its other properties like bio. With th…
-See more
+Did I hear it right that inserting an object with a unique constraint will upsert it automatically? What if you have a partially populated model? For instance my API returns a profile with an id and name, but I already have a version of that profile with all of its other properties like bio. With the other properties be wiped out if I try and insert the partial object?
 1 reply
 
 WWDC Bot
@@ -2589,8 +2580,7 @@ You don't need to use @Query; you can use ModelContext and its fetch() functions
 @Nicklas
  asked:
 A common scenario is to have Swift model classes with enum attributes. For simplicity, assume it's a Swift enum of the type Int and no associated value.
-How should we model such a NSManagedObject Swift class so that it's as easy as possible to migrate to Swift Data when we can require iOS 17? What sh…
-See more
+How should we model such a NSManagedObject Swift class so that it's as easy as possible to migrate to Swift Data when we can require iOS 17? What should the Swift class look like? And what should the Core Data model look like? I did not see any example if this in the WWDC sample code.
 4 replies
 
 WWDC Bot
