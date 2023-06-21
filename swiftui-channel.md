@@ -956,8 +956,7 @@ A Binding is a reference to the underlying state, so you can just pass the refer
 
 @David
  asked:
-I want to accept files using Transformable, but the list of acceptable file types is provided by the server. It seems like I have to provide each file type statically. Is there a way to specify a dynamic, runtime list of file types I can accept? Or is there a way to accept all file types but get the…
-See more
+I want to accept files using Transformable, but the list of acceptable file types is provided by the server. It seems like I have to provide each file type statically. Is there a way to specify a dynamic, runtime list of file types I can accept? Or is there a way to accept all file types but get the type that was actually provided?
 8 replies
 
 WWDC Bot
@@ -1269,9 +1268,8 @@ Yes, if you want to load a view controller from your storyboard in a preview you
 
 @Naftali
  asked:
-Many times working with previews becomes difficult (almost like writing unit tests) is there a way to have Previews set default data, so for example lets say I'm passing a Bool into a view can previews by default give it a value so instead of SomeView(someBool: Bool)
-it will be SomeView(someBool: .co…
-See more
+Many times working with previews becomes difficult (almost like writing unit tests) is there a way to have Previews set default data, so for example let's say I'm passing a Bool into a view can previews by default give it a value so instead of SomeView(someBool: Bool)
+it will be SomeView(someBool: `.constant(false)` or something to that effect?
 20 replies
 
 WWDC Bot
@@ -1856,11 +1854,10 @@ If you're doing a live preview of either AppKit or SwiftUI macOS code in Xcode 1
 
 WWDC Bot
 APP  
-@Jonathan P (Apple)
- answered:
+@Jonathan P (Apple) answered:
+
 It does not show up if you are previewing within the canvas in Xcode. Popovers and presentations like that need to be suppressed.
-But if you toggle the preview to be "Preview as App" (control-click on the preview button in the bottom left of the canvas to see the popup menu) then an app launches with…
-See more
+But if you toggle the preview to be "Preview as App" (control-click on the preview button in the bottom left of the canvas to see the popup menu) then an app launches with the preview and all these sheets and popovers will work as you'd expect.
 :+1:
 1
 
@@ -2046,8 +2043,9 @@ WWDC Bot
 APP  
 @Harry L (Apple)
  answered:
-You can use the scrollPosition(id:) modifier to accomplish similar kinds of things you can do with the ScrollViewReader API and it does additional things that ScrollViewReader can't do. But you might still want to use a ScrollViewReader for scrolling to views in List and Table. Or if you want more fine grain control over scrolling to nested views within non-lazy stacks.
-See more
+You can use the new `scrollPosition()` modifier along with the scrollTargetLayout() modifier to accomplish this. Just ensure the binding you provide has a non-nil initial value and the ScrollView will ensure the view with that id (within the layout configured with `scrollTargetLayout()`) is visible when the scroll view appears.
+See the docs for more information here:
+https://developer.apple.com/documentation/swiftui/view/scrollposition(id:)
 
 Jérôme
   
@@ -2057,7 +2055,7 @@ oh ! scrollPosition(id:) doesn’t work at all on List and Table?
 
 @Austin
  asked:
-Is generally an anti-pattern to use GeometryReader in SwiftUI layouts?
+Is it generally an anti-pattern to use GeometryReader in SwiftUI layouts?
 
 5 replies
 
@@ -2350,20 +2348,15 @@ APP
 @Harry L (Apple)
  answered:
 There's not an API that provides you a binding to a CGPoint as a scroll view's content offset. However, there are several new APIs that allow you to transform views based on its relative position within a ScrollView.
-The scrollTransition() API lets you apply customizations like scale, offset, and rot…
-See more
-Apple Developer DocumentationApple Developer Documentation
-scrollTransition(_:axis:transition:) | Apple Developer Documentation
-Applies the given transition, animating between the phases of the transition as this view appears and disappears within the visible region of the containing scroll view, or other container specified using the parameter. (22 kB)
+The `scrollTransition(`) API lets you apply customizations like scale, offset, and rotate that change as the view traverses a scroll view's visible region:
 https://developer.apple.com/documentation/swiftui/view/scrolltransition(_:axis:transition:)
 
-Apple Developer DocumentationApple Developer Documentation
-visualEffect(_:) | Apple Developer Documentation
-Applies effects to this view, while providing access to layout information via . (22 kB)
+And the `visualEffect()` API lets you do even more flexible things both inside and outside a scroll view by providing you a geometry proxy and letting you do customizations based on that:
 https://developer.apple.com/documentation/swiftui/view/visualeffect(_:)
 
+If there are other cases where you'd like to read a scroll view's content offset, please do file feedbacks detailing your request!
+
 Sheng
-  
 I put a correct size Color to ScrollView for scrolling and read its contentOffset to draw a real content in another View.
 
 ----
@@ -2782,8 +2775,8 @@ Wow, what a cool new view I missed, thank you!
 
 @Vanderlei
  asked:
-Hello. from macOS 13.1 beta 4 to macOS 13.2, NavigationStack animations (when using animated binding) worked for both view insertion and view removal. The animation feature is documented in the macOS release notes. Since macOS 13.3 beta 1 animation only appears to work on view removal. It still does…
-See more
+Hello. From macOS 13.1 beta 4 to macOS 13.2, NavigationStack animations (when using animated binding) worked for both view insertion and view removal. The animation feature is documented in the macOS release notes. Since macOS 13.3 beta 1 animation only appears to work on view removal. It still does not work in macOS 14 beta 1. I submitted feedback, but no answers. With bindings using `withAnimation(…)` was possible to bring to Mac push and pop animations like Navigation Controller on iOS. But since the latest version this is gone. Is this by design?
+
 8 replies
 
 WWDC Bot
@@ -3604,7 +3597,7 @@ Thank you!
 @Jordan
  asked:
 When I put a Text in the second column of a columns style Form, the SwiftUI view gets extended beyond the available horizontal space (a fixed width constraint on the UIHostingController's view) seemingly due to not line wrapping quite right. Is there a way to ensure it won’t grow larger than the containing view or could this be a bug? I have a sample project in feedback FB11809780. :)
-See more
+
 1 reply
 
 WWDC Bot
@@ -4224,8 +4217,7 @@ You could use potentially use this to create a custom refresh indicator without 
 
 @David
  asked:
-With current `ObservableObject` conformance in iOS 16 we were able to use @published vars with the $ prefix to get access to the publisher and then could set up combine chains to react to updates to the data. With moving to `@Observable`, is there a new recommendation on how to react to changes to the v…
-See more
+With current `ObservableObject` conformance in iOS 16 we were able to use @published vars with the $ prefix to get access to the publisher and then could set up combine chains to react to updates to the data. With moving to `@Observable`, is there a new recommendation on how to react to changes to the vars in your data classes? Otherwise, it seems that these changes further push code into the views and move away from separation of concerns.
 1 reply
 
 WWDC Bot
@@ -5148,8 +5140,7 @@ There's no support for formatting controls with TextEditor. But we'd appreciate 
 
 @Rich
  asked:
-I have a SwiftUI ScrollView with a VStack that has a lot of vertical content. Toward the bottom is a simple Map with no annoations. For whatever reason having the map in the hierarchy causes the first load of my ScrollView to be slow. I can resolve this by using a LazyVStack, but then I lose the abi…
-See more
+I have a SwiftUI `ScrollView` with a VStack that has a lot of vertical content. Toward the bottom is a simple Map with no annoations. For whatever reason having the map in the hierarchy causes the first load of my `ScrollView` to be slow. I can resolve this by using a `LazyVStack`, but then I lose the ability to use a ScrollViewReader's `scroll(to:)`. Is there a way to work around this? Some sort of lazy loading method I'm not thinking of?
 2 replies
 
 WWDC Bot
@@ -5610,8 +5601,7 @@ This is actively discussed in the Swift community: https://forums.swift.org/t/pi
 
 @Naftali
  asked:
-When creating a label if I want 2 lines of text and the icon centered to the text, I couldn’t find a way to do it without making a custom label, is there a better way to do it? (You can see that Apple does it settings for example in Settings > Notifications for each app it has the app name and un…
-See more
+When creating a label if I want 2 lines of text and the icon centered to the text, I couldn’t find a way to do it without making a custom label, is there a better way to do it? (You can see that Apple does it settings for example in Settings > Notifications for each app it has the app name and under the app name it says “banners, sounds”) I filed a feedback FB12251896, but maybe I’m just doing it wrong.
 5 replies
 
 WWDC Bot
@@ -5656,8 +5646,7 @@ You can apply the same tint color in your own style, along with the image scale 
 @Nayan
  asked:
 I've only seen `@Observable` macro used with classes. Can it be used with structs or does this not result in anything?
-For example, changing a property in a struct will cause the whole struct to change, therefore reloading any views that are dependent on the object, regardless of what properties it rea…
-See more
+For example, changing a property in a struct will cause the whole struct to change, therefore reloading any views that are dependent on the object, regardless of what properties it reads. I'm guessing the Observable behaviour of reloading a view only when a read property changes don't count for structs.
 2 replies
 
 WWDC Bot
@@ -5711,9 +5700,9 @@ APP
 @Julia V (Apple)
  answered:
 The same presentation is available both for document and non-document applications. Check out https://developer.apple.com/documentation/appintents/shortcutslink/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:oncancellation:) and other fileImporter variants.
-Does thi…
-See more
-Apple Developer DocumentationApple Developer Documentation
+Does this answer your question?
+
+Apple Developer Documentation
 fileImporter(isPresented:allowedContentTypes:allowsMultipleSelection:onCompletion:onCancellation:) | Apple Developer Documentation
 Presents a system dialog for allowing the user to import multiple files. (22 kB)
 https://developer.apple.com/documentation/appintents/shortcutslink/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:oncancellation:)
@@ -5830,8 +5819,7 @@ Interestingly, this issue is why we recommend that developers apply `navigationD
 @Klayton
  asked:
 Sorry if this is already being addressed.  Somebody named Eric seems to have somehow added a question to the 2022 WWDC channel when this Q&A opened:
-What is the best way to scroll/focus an item in a horizontal list on tvOS after online data loading? In my code, it doesn't work 100% of the time and…
-See more
+What is the best way to scroll/focus an item in a horizontal list on tvOS after online data loading? In my code, it doesn't work 100% of the time and I don't know why.
 1 reply
 
 WWDC Bot
@@ -5962,16 +5950,9 @@ WWDC Bot
 APP  
 @Haotian Z (Apple)
  answered:
-Hi Austin! Before going into details, I want to make sure if you were referring to OutlineGroup in List, or Table, or just OutlineGroup in a stack, and they have different implementation details so it is important to know which one we are talking. We have also published a video on optimizing perform…
-See more
-Apple DeveloperApple Developer
-Demystify SwiftUI performance - WWDC23 - Videos - Apple Developer
-Learn how you can build a mental model for performance in SwiftUI and write faster, more efficient code. We'll share some of the common... (19 kB)
-https://developer.apple.com/videos/play/wwdc2023/10160/
+Hi Austin! Before going into details, I want to make sure if you were referring to OutlineGroup in List, or Table, or just OutlineGroup in a stack, and they have different implementation details so it is important to know which one we are talking. We have also published a video on optimizing performance which includes some of the best practices. https://developer.apple.com/videos/play/wwdc2023/10160/
 
-
-Austin
-  
+Austin 
 Sorry, I was referring to an OutlineGroup contained in a List
 
 The "Demystify SwiftUI performance" session looks great, I'll take a look at that. If you have anything specific about the OutlineGroup/List combo I'm having trouble with I'd still love to hear it too though!
@@ -6056,9 +6037,9 @@ With `@Observable`, you no longer need to use a property wrapper at all for view
  asked:
 What is the recommended way to have a view that updates when it's parent ScrollView's offset changes?
 Two approaches we've tried are
-* Grabbing the underlying UIScrollView/NSScrollView and reading contentOffset
-* Putting a zero-height view at the top of the ScrollView and reading it's minY with a Geome…
-See more
+* Grabbing the underlying `UIScrollView/NSScrollView` and reading contentOffset
+* Putting a zero-height view at the top of the `ScrollView` and reading it's minY with a `GeometryReader`
+Neither one of these feels ideal.
 2 replies
 
 WWDC Bot
@@ -6172,8 +6153,7 @@ Nick T (Apple)
 @John
  asked:
 AppKit apps have the ability to indicate that a window has been edited (by putting a dot in the close button and adding "— Edited" to the title), and also asking for confirmation if the user attempts to close the window while there are unsaved changes.
-Is it possible to do this with SwiftUI and/or Ma…
-See more
+Is it possible to do this with SwiftUI and/or Mac Catalyst apps?
 2 replies
 
 WWDC Bot
@@ -7866,13 +7846,12 @@ WWDC Bot
 APP  
 @Jonathan P (Apple)
  answered:
-This is a standard compiler conditional to hide code from release builds. You can use it for anything, including Previews code. Ideally, during a release build the optimization levels set for the compiler and linker end up stripping unused non-public code out. Often, relying on this is fine. But if…
-See more
+This is a standard compiler conditional to hide code from release builds. You can use it for anything, including Previews code. Ideally, during a release build the optimization levels set for the compiler and linker end up stripping unused non-public code out. Often, relying on this is fine. But if you want to make absolutely sure about it though, we recommend wrapping any code you must exclude in `#if DEBUG`.
 
 
 Jonathan P (Apple)
   
-One benefit of using #if DEBUG is that it really does force you to make sure you don't expose anything public that you wanted stripped out. It's a compiler failure to reference anything in #if DEBUG if you try to build in release.
+One benefit of using `#if DEBUG` is that it really does force you to make sure you don't expose anything public that you wanted stripped out. It's a compiler failure to reference anything in #if DEBUG if you try to build in release.
 :raised_hands::raised_hands::skin-tone-2:
 
 Jaanus
