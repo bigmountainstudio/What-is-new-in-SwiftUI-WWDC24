@@ -1273,7 +1273,7 @@ I have the following two entities referring to each other:
 ```
 But in both relationship lines, I get the error: "Circular reference resolving attached macro 'Relationship'". What am I doing wrong?
 This was automatically generated from the old CoreData scheme by the way.
-See less
+
 :heart:
 2
 :raised_hands:
@@ -1664,7 +1664,7 @@ Models and ModelContext are not @sendable, so you can't smuggle them to other ac
 I used the ‘Create SwiftData Code’ action in Xcode, and it generated Model objects with bi-direction relationships (which is correct — my Core Data model includes these).  All of these, however, are marked with the error Circular reference resolving attached macro 'Relationship'
 I later noticed that the Sample 'Trip' app addresses this by only having the @Relationship annotation on one side of the relationship, but both of the 'child' entities refer back to an Optional Trip, and use a 'Nullifies' cascading strategy.  
 Is it possible for these child entities to refer back with a non-Optional field, and for it to use a 'Deletes' cascading strategy?  I'm considering a co-existing scenario, and I want to make sure that my two models can properly be in sync with one another
-See less
+
 
 
 
@@ -2010,7 +2010,7 @@ Please file a feedback report for the issue.
 What is the best way to import bulk data (say thousands of network interfaces)?
 Current thinking is to create a background process under 'ModelContextProvider', create a context pointing to the entities then insert/update each entity we return via external API.
 Previously, using CoreData, we utilised the BatchInsertRequest functions
-See less
+
 :eyes:
 1
 :heart:
@@ -2123,7 +2123,7 @@ Yes. Pass nil for CloudKit container identifier. There is currently a bug for th
  asked:
 In one of the SwiftData videos, the code showed a container configured with a CloudKit container identifier. But in an earlier Q&A period, someone asked if SwiftData can be used with CloudKit public, private, and shared containers and the answer was that you would need to use `NSPersistentCloudKitContainer` and CoreData co-existing with SwiftData.
 What CloudKit things does SwiftData support, and what doesn't it support? And is there a document that explains this? Thank you.
-See less
+
 1 reply
 
 WWDC Bot
@@ -2526,7 +2526,7 @@ In my app, I plan on using SharePlay for group sessions. I want to include persi
 I need a way of storing a “session” & their respective members. Once a session ends, they can edit it after the fact, even when solo-editing, which then would propagate those changes to the group, even if they’re offline.
 I imagine I’ll need a CKSyncEngine  &/or NSPersistentCloudKitContainer?
 How can I keep certain sessions exclusive to certain users, within a database?
-See less
+
 
 
 
@@ -2548,7 +2548,7 @@ https://developer.apple.com/videos/play/tech-talks/10874/
 https://developer.apple.com/videos/play/wwdc2021/10086/
 https://developer.apple.com/documentation/cloudkit/shared_records/sharing_cloudkit_data_with_other_icloud_users?language=objc
 https://developer.apple.com/documentation/cloudkit/ckshare?language=objc
-See less
+
 
 ----
 
@@ -2878,7 +2878,7 @@ Indeed the default experience will use the App Group entitlement if it is availa
 @Axel
  asked:
 When we add an object as a relationship to another object, we don’t have a insert the object in the context. But when I want to delete an item that is a relationship to another one, do I have to delete it from the modelContext or removing it from the relationship is enough? It seems the API is not doin the same. See here https://twitter.com/dimillian/status/1666728022068658176?s=46&t=-0NC4ZS-XDh_wH7LgEoSZA
-See less
+
 TwitterTwitter
 Thomas Ricouard on Twitter
 So apparently the model context in SwiftData track correctly when you append stuff. But the removeAll call is not persisted. The UI update, but when I relaunch the app, my deleted object is still there. (54 kB)
