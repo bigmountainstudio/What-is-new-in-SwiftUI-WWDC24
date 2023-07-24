@@ -16,7 +16,9 @@ A list of everything new in SwiftUI after WWDC 2023.
 
 # SwiftUI Views
 [SwiftUI Updates Reference](https://developer.apple.com/documentation/Updates/SwiftUI)
+* [autocapitalization](https://developer.apple.com/documentation/swiftui/view/autocapitalization(_:)) - deprecated. Use [textInputAutocapitalization](https://developer.apple.com/documentation/swiftui/view/textinputautocapitalization(_:)).
 * [ContentUnavailableView](https://developer.apple.com/documentation/SwiftUI/ContentUnavailableView) - A view to display when the content of your app is unavailable to users.
+* [foregroundColor](https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)) - deprecated. Use [foregroundStyle](https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:))
 * [navigationDestination](https://developer.apple.com/documentation/SwiftUI/View/navigationDestination(item:destination:)) - Associates a destination view with a bound value.
 * [toolbarTitleDisplayMode](https://developer.apple.com/documentation/SwiftUI/View/toolbarTitleDisplayMode(_:)) - Configures the toolbar title display mode for this view.
 * [UnevenRoundedRectangle](https://developer.apple.com/documentation/swiftui/unevenroundedrectangle) - Create rectangles with individual rounded corners.
@@ -27,7 +29,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 ## List
 * [alternatingRowBackgrounds](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) - Specifies alternating row backgrounds on list or table. Can be .enabled, .disabled, or .automatic.
 * [backgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence) - Make rows stand out more. Can be .standard or .increased.
-* [badgeProminence](https://developer.apple.com/documentation/swiftui/badgeprominence) - The badge is the value at the trailing side of the row. It can be .increased, .decreased or .standard. 
+* [badgeProminence](https://developer.apple.com/documentation/swiftui/badgeprominence) - The badge is the value at the trailing side of the row. It can be .increased, .decreased, or .standard. 
 * [listRowSpacing](https://developer.apple.com/documentation/SwiftUI/View/listRowSpacing(_:)) - Spacing between each row. (iOS 15)
 * [selectionDisabled](https://developer.apple.com/documentation/SwiftUI/View/selectionDisabled(_:)) - Disable selection of individual rows.
 ### Sections
@@ -35,7 +37,11 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [Section(isExpanded:)](https://developer.apple.com/documentation/swiftui/section/init(isexpanded:content:header:)-561d7) - Control expandability of section with bound property.
 ### Search
 * [searchable(text:editableTokens:placement:prompt:token:)](https://developer.apple.com/documentation/swiftui/view/searchable(text:editabletokens:placement:prompt:token:)-41gcr) - New search initializer.
-### Toolbar
+
+## NavigationStack
+* [navigationBarTitle](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)-6p1k7) - deprecated. Use [navigationTitle](https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u).
+
+## Toolbar
 * [bottomBar](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/bottombar?changes=latest_minor) - Puts view in bottom bar.
 * [topBarLeading](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbarleading?changes=latest_minor) - Use this instead of navigationBarLeading (deprecated).
 * [topBarTrailing](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbartrailing?changes=latest_minor) - Use this instead of navigationBarTrailing (deprecated).
