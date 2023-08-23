@@ -13,6 +13,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [@Observable](https://developer.apple.com/documentation/observation/observable-swift.macro) - Replaces ObservableObject.
 * [@Bindable](https://developer.apple.com/documentation/swiftui/bindable) - Replaces @ObservedObject.
 * [onChange(of:)](https://developer.apple.com/documentation/SwiftUI/View/onChange(of:initial:_:)-4psgg) - Replaces previous onChange(of: perform:).
+* [@StateObject](https://developer.apple.com/documentation/swiftui/stateobject) can now be replaced with the new @State for ObservableObject classes migrating to @Observable.
 
 # SwiftUI Views
 [SwiftUI Updates Reference](https://developer.apple.com/documentation/Updates/SwiftUI)
