@@ -12,7 +12,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [@Environment](https://developer.apple.com/documentation/swiftui/environment/init(_:)-7pint) - New init to replace @EnvironmentObject.
 * [@Observable](https://developer.apple.com/documentation/observation/observable-swift.macro) - Replaces ObservableObject.
 * [@Bindable](https://developer.apple.com/documentation/swiftui/bindable) - Replaces @ObservedObject.
-* [onChange(of:)](https://developer.apple.com/documentation/SwiftUI/View/onChange(of:initial:_:)-4psgg) - Replaces previous onChange(of:).
+* [onChange(of:)](https://developer.apple.com/documentation/SwiftUI/View/onChange(of:initial:_:)-4psgg) - Replaces previous onChange(of: perform:).
 
 # SwiftUI Views
 [SwiftUI Updates Reference](https://developer.apple.com/documentation/Updates/SwiftUI)
