@@ -9,8 +9,8 @@ A list of everything new in SwiftUI after WWDC 2023.
 
 # Working with Data
 * [Observation](https://developer.apple.com/documentation/Observation)
-* [@Environment](https://developer.apple.com/documentation/swiftui/environment/init(_:)-7pint) - New init to replace @EnvironmentObject.
-* [@Observable](https://developer.apple.com/documentation/observation/observable-swift.macro) - Replaces ObservableObject.
+* [@Environment](https://developer.apple.com/documentation/swiftui/environment/init(_:)-7pint) - Like @EnvironmentObject but stores classes that use the `@Observable` macro.
+* [@Observable](https://developer.apple.com/documentation/observation/observable()) - Replaces ObservableObject.
 * [@Bindable](https://developer.apple.com/documentation/swiftui/bindable) - Replaces @ObservedObject.
 * [onChange(of:)](https://developer.apple.com/documentation/SwiftUI/View/onChange(of:initial:_:)-4psgg) - Replaces previous onChange(of: perform:).
 * [@StateObject](https://developer.apple.com/documentation/swiftui/stateobject) can now be replaced with the new @State for ObservableObject classes migrating to @Observable.
