@@ -43,7 +43,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [navigationBarTitle](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)-6p1k7) - deprecated. Use [navigationTitle](https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u).
 
 ## Toolbar
-* [bottomBar](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/bottombar?changes=latest_minor) - Puts view in bottom bar.
+* [bottomBar](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/bottombar?changes=latest_minor) - Puts view in the bottom bar.
 * [topBarLeading](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbarleading?changes=latest_minor) - Use this instead of navigationBarLeading (deprecated).
 * [topBarTrailing](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbartrailing?changes=latest_minor) - Use this instead of navigationBarTrailing (deprecated).
 * [toolbarTitleDisplayMode](https://developer.apple.com/documentation/swiftui/view/toolbartitledisplaymode(_:)?changes=latest_minor) - Can be .automatic, .inline, .inlineLarge, .large
@@ -53,7 +53,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [PhaseAnimator](https://developer.apple.com/documentation/swiftui/view/phaseanimator(_:content:animation:)) - Animations per steps (phases) you provide.
 * [SF Symbol Animations](https://developer.apple.com/documentation/symbols) - 4 sections for the different types of symbol animations.
 * [CustomAnimation](https://developer.apple.com/documentation/SwiftUI/CustomAnimation) - How an animatable value should change over time.
-* [UnitCurve](https://developer.apple.com/documentation/SwiftUI/UnitCurve) - Another way to define an custom animation curve.
+* [UnitCurve](https://developer.apple.com/documentation/SwiftUI/UnitCurve) - Another way to define a custom animation curve.
 * [spring](https://developer.apple.com/documentation/SwiftUI/Animation/spring(duration:bounce:blendDuration:)) - Another spring animation that works across all platforms.
 * [Spring](https://developer.apple.com/documentation/SwiftUI/Spring) - Store your spring animation settings in an object so you can reuse the same spring animation.
 
