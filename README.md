@@ -57,4 +57,5 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [spring](https://developer.apple.com/documentation/SwiftUI/Animation/spring(duration:bounce:blendDuration:)) - Another spring animation that works across all platforms.
 * [Spring](https://developer.apple.com/documentation/SwiftUI/Spring) - Store your spring animation settings in an object so you can reuse the same spring animation.
 
-![Gold logo](https://user-images.githubusercontent.com/24855856/173091471-81c1c475-fc64-4cb0-8149-343719a1cb12.png)
+
+![color logo book](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/4509ce75-14ee-43e7-a62d-c46d7200ddda)
