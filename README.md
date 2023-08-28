@@ -54,7 +54,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [SF Symbol Animations](https://developer.apple.com/documentation/symbols) - 4 sections for the different types of symbol animations.
 * [CustomAnimation](https://developer.apple.com/documentation/SwiftUI/CustomAnimation) - How an animatable value should change over time.
 * [UnitCurve](https://developer.apple.com/documentation/SwiftUI/UnitCurve) - Another way to define a custom animation curve.
-* [spring](https://developer.apple.com/documentation/SwiftUI/Animation/spring(duration:bounce:blendDuration:)) - Another spring animation that works across all platforms.
+* [spring](https://developer.apple.com/documentation/swiftui/animation/spring(_:blendduration:)) - Another spring animation that accepts the new Spring object (see below).
 * [Spring](https://developer.apple.com/documentation/SwiftUI/Spring) - Store your spring animation settings in an object so you can reuse the same spring animation.
 
 
