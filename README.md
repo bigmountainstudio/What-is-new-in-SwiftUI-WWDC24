@@ -19,6 +19,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 [SwiftUI Updates Reference](https://developer.apple.com/documentation/Updates/SwiftUI)
 * [autocapitalization](https://developer.apple.com/documentation/swiftui/view/autocapitalization(_:)) - deprecated. Use [textInputAutocapitalization](https://developer.apple.com/documentation/swiftui/view/textinputautocapitalization(_:)).
 * [ContentUnavailableView](https://developer.apple.com/documentation/SwiftUI/ContentUnavailableView) - A view to display when the content of your app is unavailable to users.
+* disableAutocorrection - deprecated. Use [autocorrectionDisabled](https://developer.apple.com/documentation/swiftui/view/autocorrectiondisabled(_:)).
 * [foregroundColor](https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)) - deprecated. Use [foregroundStyle](https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:))
 * [symbolEffect](https://developer.apple.com/documentation/swiftui/view/symboleffect(_:options:value:)) - Adds an animation [effect](https://developer.apple.com/documentation/symbols/symboleffect) to the SF Symbol. Can be: .appear, .automatic, .bounce, .disappear, .pulse, .replace, .scale, .variablecolor.
 * [UnevenRoundedRectangle](https://developer.apple.com/documentation/swiftui/unevenroundedrectangle) - Create rectangles with individual rounded corners.
