@@ -20,7 +20,6 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [autocapitalization](https://developer.apple.com/documentation/swiftui/view/autocapitalization(_:)) - deprecated. Use [textInputAutocapitalization](https://developer.apple.com/documentation/swiftui/view/textinputautocapitalization(_:)).
 * [ContentUnavailableView](https://developer.apple.com/documentation/SwiftUI/ContentUnavailableView) - A view to display when the content of your app is unavailable to users.
 * [foregroundColor](https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)) - deprecated. Use [foregroundStyle](https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:))
-* [navigationDestination](https://developer.apple.com/documentation/SwiftUI/View/navigationDestination(item:destination:)) - Associates a destination view with a bound value.
 * [symbolEffect](https://developer.apple.com/documentation/swiftui/view/symboleffect(_:options:value:)) - Adds an animation [effect](https://developer.apple.com/documentation/symbols/symboleffect) to the SF Symbol. Can be: .appear, .automatic, .bounce, .disappear, .pulse, .replace, .scale, .variablecolor.
 * [UnevenRoundedRectangle](https://developer.apple.com/documentation/swiftui/unevenroundedrectangle) - Create rectangles with individual rounded corners.
 
@@ -41,6 +40,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 
 ## NavigationStack
 * [navigationBarTitle](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)-6p1k7) - deprecated. Use [navigationTitle](https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u).
+* [navigationDestination(item:destination:)](https://developer.apple.com/documentation/SwiftUI/View/navigationDestination(item:destination:)) - Associates a destination view with a bound value. Use this with `NavigationLink` to replace `NavigationLink(destination:isActive:label:)`.
 
 ## Toolbar
 * [bottomBar](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/bottombar?changes=latest_minor) - Puts view in the bottom bar.
