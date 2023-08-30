@@ -32,7 +32,6 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [badgeProminence](https://developer.apple.com/documentation/swiftui/badgeprominence) - The badge is the value at the trailing side of the row. It can be .increased, .decreased, or .standard. 
 * [listRowSpacing](https://developer.apple.com/documentation/SwiftUI/View/listRowSpacing(_:)) - Spacing between each row. (iOS 15)
 * [selectionDisabled](https://developer.apple.com/documentation/SwiftUI/View/selectionDisabled(_:)) - Disable selection of individual rows.
-* [Section(*, isExpanded:, *](https://developer.apple.com/documentation/swiftui/section/init(_:isexpanded:content:)-153np) - Allows a `Section` to be collapsible.
 ### Sections
 * [listSectionSpacing](https://developer.apple.com/documentation/swiftui/view/listsectionspacing(_:)-a2sn) - Spacing between sections (can be value or enum like .default or .compact).
 * [Section(isExpanded:)](https://developer.apple.com/documentation/swiftui/section/init(isexpanded:content:header:)-561d7) - Control expandability of section with bound property.
