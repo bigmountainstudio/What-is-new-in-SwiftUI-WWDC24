@@ -8,12 +8,12 @@ A list of everything new in SwiftUI after WWDC 2023.
 [SwiftData](https://developer.apple.com/documentation/SwiftData)
 
 # Working with Data
-* [Observation](https://developer.apple.com/documentation/Observation)
-* [@Environment](https://developer.apple.com/documentation/swiftui/environment/init(_:)-7pint) - Like @EnvironmentObject but stores classes that use the `@Observable` macro.
-* [@Observable](https://developer.apple.com/documentation/observation/observable()) - Replaces ObservableObject.
-* [@Bindable](https://developer.apple.com/documentation/swiftui/bindable) - Replaces @ObservedObject.
-* [onChange(of:)](https://developer.apple.com/documentation/SwiftUI/View/onChange(of:initial:_:)-4psgg) - Replaces previous onChange(of: perform:).
-* [@StateObject](https://developer.apple.com/documentation/swiftui/stateobject) can now be replaced with the new @State for ObservableObject classes migrating to @Observable.
+* [Observation](https://developer.apple.com/documentation/Observation) 📕
+* [@Environment](https://developer.apple.com/documentation/swiftui/environment/init(_:)-7pint) - Like @EnvironmentObject but stores classes that use the `@Observable` macro. 📕
+* [@Observable](https://developer.apple.com/documentation/observation/observable()) - Replaces ObservableObject. 📕
+* [@Bindable](https://developer.apple.com/documentation/swiftui/bindable) - Replaces @ObservedObject. 📕
+* [onChange(of:)](https://developer.apple.com/documentation/SwiftUI/View/onChange(of:initial:_:)-4psgg) - Replaces previous onChange(of: perform:). 📕
+* [@StateObject](https://developer.apple.com/documentation/swiftui/stateobject) can now be replaced with the new @State for ObservableObject classes migrating to @Observable. 📕
 
 # SwiftUI Views
 [SwiftUI Updates Reference](https://developer.apple.com/documentation/Updates/SwiftUI)
@@ -50,13 +50,13 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [toolbarTitleDisplayMode](https://developer.apple.com/documentation/swiftui/view/toolbartitledisplaymode(_:)?changes=latest_minor) - Can be .automatic, .inline, .inlineLarge, .large. Note: This also works on NavigationStacks in place of navigationBarTitleDisplayMode (navigationBarTitleDisplayMode is not deprecated though so you can continue to use it).
 
 # SwiftUI Animations
-* [WithAnimation Completions](https://developer.apple.com/documentation/SwiftUI/withAnimation(_:completionCriteria:_:completion:)) - Perform action when animation completes.
-* [PhaseAnimator](https://developer.apple.com/documentation/swiftui/view/phaseanimator(_:content:animation:)) - Animations per steps (phases) you provide.
+* [WithAnimation Completions](https://developer.apple.com/documentation/SwiftUI/withAnimation(_:completionCriteria:_:completion:)) - Perform action when animation completes. 📕
+* [PhaseAnimator](https://developer.apple.com/documentation/swiftui/view/phaseanimator(_:content:animation:)) - Animations per steps (phases) you provide. 📕
 * [SF Symbol Animations](https://developer.apple.com/documentation/symbols) - 4 sections for the different types of symbol animations.
 * [CustomAnimation](https://developer.apple.com/documentation/SwiftUI/CustomAnimation) - How an animatable value should change over time.
-* [UnitCurve](https://developer.apple.com/documentation/SwiftUI/UnitCurve) - Another way to define a custom animation curve.
-* [spring](https://developer.apple.com/documentation/swiftui/animation/spring(_:blendduration:)) - Another spring animation that accepts the new Spring object (see below).
-* [Spring](https://developer.apple.com/documentation/SwiftUI/Spring) - Store your spring animation settings in an object so you can reuse the same spring animation.
+* [UnitCurve](https://developer.apple.com/documentation/SwiftUI/UnitCurve) - Another way to define a custom animation curve. 📕
+* [spring](https://developer.apple.com/documentation/swiftui/animation/spring(_:blendduration:)) - Another spring animation that accepts the new Spring object (see below). 📕
+* [Spring](https://developer.apple.com/documentation/SwiftUI/Spring) - Store your spring animation settings in an object so you can reuse the same spring animation. 📕
 
-
+(📕 = Added to book)
 ![color logo book](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/4509ce75-14ee-43e7-a62d-c46d7200ddda)
