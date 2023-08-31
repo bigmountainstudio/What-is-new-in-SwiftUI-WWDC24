@@ -58,5 +58,6 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [spring](https://developer.apple.com/documentation/swiftui/animation/spring(_:blendduration:)) - Another spring animation that accepts the new Spring object (see below). 📕
 * [Spring](https://developer.apple.com/documentation/SwiftUI/Spring) - Store your spring animation settings in an object so you can reuse the same spring animation. 📕
 
-(📕 = Added to book)
+(📕 = Added to books)
+
 ![color logo book](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/4509ce75-14ee-43e7-a62d-c46d7200ddda)
