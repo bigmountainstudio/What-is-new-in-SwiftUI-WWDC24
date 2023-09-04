@@ -24,7 +24,9 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [symbolEffect](https://developer.apple.com/documentation/swiftui/view/symboleffect(_:options:value:)) - Adds an animation [effect](https://developer.apple.com/documentation/symbols/symboleffect) to the SF Symbol. Can be: .appear, .automatic, .bounce, .disappear, .pulse, .replace, .scale, .variablecolor.
 * [UnevenRoundedRectangle](https://developer.apple.com/documentation/swiftui/unevenroundedrectangle) - Create rectangles with individual rounded corners.
 
-## Charts
+## Button
+* [Button(_:image:action:)](https://developer.apple.com/documentation/swiftui/button/init(_:image:action:)-6dqq9?changes=_7) - Variety of ways to create a button with an image.
+## Chart
 * [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts.  
 
 ## List
