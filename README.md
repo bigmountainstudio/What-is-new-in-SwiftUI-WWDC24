@@ -31,7 +31,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 
 ## List
 * [alternatingRowBackgrounds](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) - Specifies alternating row backgrounds on list or table. Can be .enabled, .disabled, or .automatic. (macOS only) ❌
-* [backgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence) - Make rows stand out more. Can be .standard or .increased.
+* [backgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence) - Make rows stand out more with contrast. Can be .standard or .increased.
 * [badgeProminence](https://developer.apple.com/documentation/swiftui/badgeprominence) - The badge is the value at the trailing side of the row. It can be .increased, .decreased, or .standard. 📕
 * [listRowSpacing](https://developer.apple.com/documentation/SwiftUI/View/listRowSpacing(_:)) - Spacing between each row. (iOS 15) 📕
 * [selectionDisabled](https://developer.apple.com/documentation/SwiftUI/View/selectionDisabled(_:)) - Disable selection of individual rows. 📕
