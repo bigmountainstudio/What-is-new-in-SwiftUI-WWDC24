@@ -26,6 +26,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 
 ## Button
 * [Button(_:image:action:)](https://developer.apple.com/documentation/swiftui/button/init(_:image:action:)-6dqq9?changes=_7) - Variety of ways to create a button with an image. 📕
+* [buttonBorderShape](https://developer.apple.com/documentation/swiftui/buttonbordershape) - Use shapes for bordered button styles.
 ## Chart
 * [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts. 📕
 
