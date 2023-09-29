@@ -30,7 +30,6 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [buttonBorderShape](https://developer.apple.com/documentation/swiftui/buttonbordershape) - Use shapes for bordered button styles. Can be .automatic, .capsule, .circle, .roundedRectangle.
 ## Chart
 * [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts. 📕
-
 ## List
 * [alternatingRowBackgrounds](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) - Specifies alternating row backgrounds on list or table. Can be .enabled, .disabled, or .automatic. (macOS only) ❌
 * [backgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence) - Make rows stand out more with contrast. Can be .standard or .increased.
@@ -52,6 +51,10 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [topBarLeading](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbarleading?changes=latest_minor) - Use this instead of navigationBarLeading (deprecated). 📕
 * [topBarTrailing](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbartrailing?changes=latest_minor) - Use this instead of navigationBarTrailing (deprecated). 📕
 * [toolbarTitleDisplayMode](https://developer.apple.com/documentation/swiftui/view/toolbartitledisplaymode(_:)?changes=latest_minor) - Can be .automatic, .inline, .inlineLarge, .large. Note: This also works on NavigationStacks in place of navigationBarTitleDisplayMode (navigationBarTitleDisplayMode is not deprecated though so you can continue to use it).
+
+## ScrollView
+* [scrollTargetBehavior](https://developer.apple.com/documentation/swiftui/scrolltargetbehavior) - Helps scrolling slow down and stop at certain positions. Can be .paging, .viewAligned, or custom logic.
+* [scrollTargetLayout](https://developer.apple.com/documentation/swiftui/view/scrolltargetlayout(isenabled:)) - Works with scrollTargetBehavior. Helps define which view exactly within the ScrollView the scrolling should and should not snap to.
 
 # SwiftUI Animations
 * [WithAnimation Completions](https://developer.apple.com/documentation/SwiftUI/withAnimation(_:completionCriteria:_:completion:)) - Perform action when animation completes. 📕
