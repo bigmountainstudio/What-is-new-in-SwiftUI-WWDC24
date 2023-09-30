@@ -28,6 +28,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 ## Button
 * [Button(_:image:action:)](https://developer.apple.com/documentation/swiftui/button/init(_:image:action:)-6dqq9?changes=_7) - Variety of ways to create a button with an image. 📕
 * [buttonBorderShape](https://developer.apple.com/documentation/swiftui/buttonbordershape) - Use shapes for bordered button styles. Can be .automatic, .capsule, .circle, .roundedRectangle.
+* [buttonRepeatBehavior](https://developer.apple.com/documentation/swiftui/view/buttonrepeatbehavior(_:)) - When enabled, allows the button to be held down and perform its action over and over again.
 ## Chart
 * [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts. 📕
 ## List
@@ -41,6 +42,9 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [Section(isExpanded:)](https://developer.apple.com/documentation/swiftui/section/init(isexpanded:content:header:)-561d7) - Control expandability of section with bound property.
 ### Search
 * [searchable(text:editableTokens:placement:prompt:token:)](https://developer.apple.com/documentation/swiftui/view/searchable(text:editabletokens:placement:prompt:token:)-41gcr) - New search initializer.
+
+## Layout Modifiers
+* [containerRelativeFrame](https://developer.apple.com/documentation/swiftui/view/containerrelativeframe(_:count:span:spacing:alignment:)) - Allows you to lay out a child view within a container's frame using different parameter options to divide up that available space and specify which portion of the space you want your child view to occupy.
 
 ## NavigationStack
 * [navigationBarTitle](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)-6p1k7) - deprecated. Use [navigationTitle](https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u). 📕
