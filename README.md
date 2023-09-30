@@ -46,15 +46,16 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [navigationBarTitle](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)-6p1k7) - deprecated. Use [navigationTitle](https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u). 📕
 * [navigationDestination(item:destination:)](https://developer.apple.com/documentation/SwiftUI/View/navigationDestination(item:destination:)) - Associates a destination view with a bound value. Use this with `NavigationLink` to replace `NavigationLink(destination:isActive:label:)`.
 
+## ScrollView
+* [contentMargins](https://developer.apple.com/documentation/swiftui/view/contentmargins(_:for:)) - Adds padding all around the content or scroll indicators within the scrolling container (ScrollView, List, Form, etc.).
+* [scrollTargetBehavior](https://developer.apple.com/documentation/swiftui/scrolltargetbehavior) - Helps scrolling slow down and stop at certain positions. Can be .paging, .viewAligned, or custom logic.
+* [scrollTargetLayout](https://developer.apple.com/documentation/swiftui/view/scrolltargetlayout(isenabled:)) - Works with scrollTargetBehavior. Helps define which view exactly within the ScrollView the scrolling should and should not snap to.
+
 ## Toolbar
 * [bottomBar](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/bottombar?changes=latest_minor) - Puts view in the bottom bar.
 * [topBarLeading](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbarleading?changes=latest_minor) - Use this instead of navigationBarLeading (deprecated). 📕
 * [topBarTrailing](https://developer.apple.com/documentation/swiftui/toolbaritemplacement/topbartrailing?changes=latest_minor) - Use this instead of navigationBarTrailing (deprecated). 📕
 * [toolbarTitleDisplayMode](https://developer.apple.com/documentation/swiftui/view/toolbartitledisplaymode(_:)?changes=latest_minor) - Can be .automatic, .inline, .inlineLarge, .large. Note: This also works on NavigationStacks in place of navigationBarTitleDisplayMode (navigationBarTitleDisplayMode is not deprecated though so you can continue to use it).
-
-## ScrollView
-* [scrollTargetBehavior](https://developer.apple.com/documentation/swiftui/scrolltargetbehavior) - Helps scrolling slow down and stop at certain positions. Can be .paging, .viewAligned, or custom logic.
-* [scrollTargetLayout](https://developer.apple.com/documentation/swiftui/view/scrolltargetlayout(isenabled:)) - Works with scrollTargetBehavior. Helps define which view exactly within the ScrollView the scrolling should and should not snap to.
 
 # SwiftUI Animations
 * [WithAnimation Completions](https://developer.apple.com/documentation/SwiftUI/withAnimation(_:completionCriteria:_:completion:)) - Perform action when animation completes. 📕
