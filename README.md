@@ -51,7 +51,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [containerRelativeFrame](https://developer.apple.com/documentation/swiftui/view/containerrelativeframe(_:count:span:spacing:alignment:)) - Allows you to lay out a child view within a container's frame using different parameter options to divide up that available space and specify which portion of the space you want your child view to occupy.
 
 ## Menu 
-* [Menu(_:[system]image:*)]() - Variety of ways to create a menu with an image.
+* [Menu(_: systemImage: *)](https://developer.apple.com/documentation/swiftui/menu/init(_:systemimage:content:)-7axwe) - Variety of ways to create a menu with an image.
 
 ## NavigationStack
 * [navigationBarTitle](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)-6p1k7) - deprecated. Use [navigationTitle](https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u). 📕
