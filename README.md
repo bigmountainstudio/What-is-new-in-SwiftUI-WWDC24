@@ -42,7 +42,8 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [Section(isExpanded:)](https://developer.apple.com/documentation/swiftui/section/init(isexpanded:content:header:)-561d7) - Control expandability of section with bound property.
 ### Search
 * [searchable(text:editableTokens:placement:prompt:token:)](https://developer.apple.com/documentation/swiftui/view/searchable(text:editabletokens:placement:prompt:token:)-41gcr) - New search initializer.
-### Text
+
+## Text
 * [lineLimit(range)](https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-4hzfa) - Range of lines. (iOS 16)
 * [lineLimit(_:reservesSpace:)](https://developer.apple.com/documentation/swiftui/view/linelimit(_:reservesspace:)) - Reserves the spacing for the number of lines specified. (iOS 16)
   
