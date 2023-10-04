@@ -33,6 +33,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 * [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts. 📕
 ## Menu
 * [pickerStyle(.palette)](https://developer.apple.com/documentation/swiftui/pickerstyle/palette) - When you have a Picker within your menu, you can apply this modifier to horizontally scrolling options.
+** 
 ## List
 * [alternatingRowBackgrounds](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) - Specifies alternating row backgrounds on list or table. Can be .enabled, .disabled, or .automatic. (macOS only) ❌
 * [backgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence) - Make rows stand out more with contrast. Can be .standard or .increased.
@@ -54,6 +55,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 
 ## Menu 
 * [Menu(_: systemImage: *)](https://developer.apple.com/documentation/swiftui/menu/init(_:systemimage:content:)-7axwe) - Variety of ways to create a menu with an image.
+  * [paletteSelectionEffect](https://developer.apple.com/documentation/swiftui/paletteselectioneffect?changes=_5) - Use SF Symbols to show which item is selected.
 
 ## NavigationStack
 * [navigationBarTitle](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)-6p1k7) - deprecated. Use [navigationTitle](https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u). 📕
