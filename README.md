@@ -32,7 +32,7 @@ A list of everything new in SwiftUI after WWDC 2023.
 ## Chart
 * [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts. 📕
 ## Menu
-* [pickerStyle(.palette)](https://developer.apple.com/documentation/swiftui/pickerstyle/palette) - When you have a Picker within your menu, you can apply this modifier to horizontally scroll options. (Tested and currently not working right.)
+* [pickerStyle(.palette)](https://developer.apple.com/documentation/swiftui/pickerstyle/palette) - When you have a Picker within your menu, you can apply this modifier to horizontally scroll options. (Tested and currently not working right.) ❌
 ** 
 ## List
 * [alternatingRowBackgrounds](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) - Specifies alternating row backgrounds on list or table. Can be .enabled, .disabled, or .automatic. (macOS only) ❌
