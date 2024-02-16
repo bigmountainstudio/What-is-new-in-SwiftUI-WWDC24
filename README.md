@@ -27,12 +27,12 @@ A list of everything new in SwiftUI after WWDC 2023.
 
 ## Button
 * [Button(_:image:action:)](https://developer.apple.com/documentation/swiftui/button/init(_:image:action:)-6dqq9?changes=_7) - Variety of ways to create a button with an image. 📕
-* [buttonBorderShape](https://developer.apple.com/documentation/swiftui/buttonbordershape) - Use shapes for bordered button styles. Can be .automatic, .capsule, .circle, .roundedRectangle.
-* [buttonRepeatBehavior](https://developer.apple.com/documentation/swiftui/view/buttonrepeatbehavior(_:)) - When enabled, allows the button to be held down and perform its action over and over again.
+* [buttonBorderShape](https://developer.apple.com/documentation/swiftui/buttonbordershape) - Use shapes for bordered button styles. Can be .automatic, .capsule, .circle, .roundedRectangle. 📕
+* [buttonRepeatBehavior](https://developer.apple.com/documentation/swiftui/view/buttonrepeatbehavior(_:)) - When enabled, allows the button to be held down and perform its action over and over again. 📕
 ## Chart
 * [SectorMark](https://developer.apple.com/documentation/charts/sectormark) - Used to make pie and donut charts. 📕
 ## Menu
-* [pickerStyle(.palette)](https://developer.apple.com/documentation/swiftui/pickerstyle/palette) - When you have a Picker within your menu, you can apply this modifier to horizontally scrolling options.
+* [pickerStyle(.palette)](https://developer.apple.com/documentation/swiftui/pickerstyle/palette) - When you have a Picker within your menu, you can apply this modifier to horizontally scroll options. (Tested and currently not working right.)
 ** 
 ## List
 * [alternatingRowBackgrounds](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) - Specifies alternating row backgrounds on list or table. Can be .enabled, .disabled, or .automatic. (macOS only) ❌
