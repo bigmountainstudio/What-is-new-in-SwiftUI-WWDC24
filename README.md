@@ -11,7 +11,12 @@ A list of everything new in SwiftUI after WWDC 2024.
 
 # SwiftUI Views
 ## CONTROL VIEWS
-* [Form - ForEach(subviewOf:)](https://developer.apple.com/documentation/SwiftUI/ForEach/init(subviewOf:content:)) 
+* [Form - ForEach(subviewOf:)](https://developer.apple.com/documentation/SwiftUI/ForEach/init(subviewOf:content:))
+* [ScrollView(limitBehavior:](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior) Limits number of views scrolled to (one or few).
+* [ScrollView.onScrollGeometryChange(for:)](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)/) React to scrolling changes.
+* [ScrollView.onScrollPhaseChange](https://developer.apple.com/documentation/SwiftUI/View/onScrollPhaseChange(_:)-7mica) React to changes in the scroll phase (animating, decelerating, idle, interacting, tracking)
+* [ScrollView.onScrollVisibilityChange(threshold:)](https://developer.apple.com/documentation/SwiftUI/View/onScrollVisibilityChange(threshold:_:)) Trigger action when scrolled past a point.
+* [ScrollView.scrollPosition(:anchor:](https://developer.apple.com/documentation/SwiftUI/View/scrollPosition(_:anchor:)) Scroll to a view, offset, or edge.
 * [TabView]()
 * [Text(format:](https://developer.apple.com/documentation/foundation/formatstyle) New format styles functions (offset, reference, stopwatch, timer counting down & up)
 ## IMAGE (Might consider extracting Symbols into its own section)
