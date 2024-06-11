@@ -10,8 +10,8 @@ A list of everything new in SwiftUI after WWDC 2024.
 * [Topic]()
 
 # SwiftUI Views
-## Chapter
-* [Topic]()
+## CONTROL VIEWS
+* [TabView]()
 
 # SwiftUI Animations
 ## Chapter
@@ -25,6 +25,14 @@ A list of everything new in SwiftUI after WWDC 2024.
 ## Chapter
 * [Topic]()
 
+# Advanced SwiftUI
+## Controls
+* [ControlWidgetButton](https://developer.apple.com/documentation/widgetkit/controlwidgetbutton/)
+## Image
+* [SymbolEffect](https://developer.apple.com/documentation/symbols/symboleffect/) (New effects: .breath, .rotate, .wiggle)
+## Paints
+* [MeshGradient](https://developer.apple.com/documentation/swiftui/meshgradient/)
+  
 (📕 = Added to books)
 
 ![color logo book](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/4509ce75-14ee-43e7-a62d-c46d7200ddda)
