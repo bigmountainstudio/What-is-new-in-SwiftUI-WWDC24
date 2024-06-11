@@ -11,10 +11,14 @@ A list of everything new in SwiftUI after WWDC 2024.
 
 # SwiftUI Views
 ## CONTROL VIEWS
+* [Form - ForEach(subviewOf:)](https://developer.apple.com/documentation/SwiftUI/ForEach/init(subviewOf:content:)) 
 * [TabView]()
+* [Text(format:](https://developer.apple.com/documentation/foundation/formatstyle) New format styles functions (offset, reference, stopwatch, timer counting down & up)
 ## IMAGE (Might consider extracting Symbols into its own section)
-* [ReplaceSymbolEffect](https://developer.apple.com/documentation/symbols/replacesymboleffect) - New magic replace function
+* [ReplaceSymbolEffect](https://developer.apple.com/documentation/symbols/replacesymboleffect) New magic replace function
 * [SymbolEffect](https://developer.apple.com/documentation/symbols/symboleffect/) (New effects: .breath, .rotate, .wiggle)
+## OTHER VIEWS
+* [Color .mix(with:)](https://developer.apple.com/documentation/swiftui/color/mix(with:by:in:)/) Create a new color by mixing with another.
 ## PAINTS
 * [MeshGradient](https://developer.apple.com/documentation/swiftui/meshgradient/) A two-dimensional gradient defined by a 2D grid of positioned colors.
 
@@ -36,5 +40,9 @@ A list of everything new in SwiftUI after WWDC 2024.
 
   
 (📕 = Added to books)
+
+# Helpful References
+* [SwiftUI Updates](https://developer.apple.com/documentation/updates/swiftui)
+
 
 ![color logo book](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/4509ce75-14ee-43e7-a62d-c46d7200ddda)
