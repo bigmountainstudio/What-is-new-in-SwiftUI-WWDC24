@@ -1,12 +1,9 @@
 # What's New In SwiftUI for iOS Cheat Sheet - WWDC24
-![what's new in SwiftUI for wwdc 2024](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/5fad9a39-a33e-40a2-9e4f-3ed4867424d6)
+![what's new in SwiftUI for WWDC 2024](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/5fad9a39-a33e-40a2-9e4f-3ed4867424d6)
 
 By [Big Mountain Studio](https://www.bigmountainstudio.com/)
 
 A list of everything new in SwiftUI after WWDC 2024.
-# SwiftData
-## Chapter
-* [Topic]()
 
 # SwiftUI Essentials - Architecting and Scalable & Maintainable Apps
 ## Chapter
@@ -17,6 +14,10 @@ A list of everything new in SwiftUI after WWDC 2024.
 * [Topic]()
 
 # SwiftUI Animations
+## Chapter
+* [Topic]()
+
+# SwiftData
 ## Chapter
 * [Topic]()
 
