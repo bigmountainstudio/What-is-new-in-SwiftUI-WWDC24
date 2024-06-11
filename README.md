@@ -6,8 +6,8 @@ By [Big Mountain Studio](https://www.bigmountainstudio.com/)
 A list of everything new in SwiftUI after WWDC 2024.
 
 # SwiftUI Essentials - Architecting and Scalable & Maintainable Apps
-## Chapter
-* [Topic]()
+## @State, @StateObject
+* [@Previewable](https://developer.apple.com/documentation/swiftui/previewable()) Use in front of `@State` and `@StateObject` in previews.
 
 # SwiftUI Views
 ## CONTROL VIEWS
@@ -32,8 +32,12 @@ A list of everything new in SwiftUI after WWDC 2024.
 * [Topic]()
 
 # SwiftData
-## Chapter
-* [Topic]()
+## Mock Data
+* [PreviewModifier + PreviewTrait](https://developer.apple.com/documentation/swiftui/previewmodifier) Allows set up of mock data that is accessible through the `#Preview(trait:)` parameter.
+* [@Previewable](https://developer.apple.com/documentation/swiftui/previewable()) Use in front of `@Query` in previews.
+## Model Options
+* [@Attribute(.preserveValueOnDeletion](https://developer.apple.com/documentation/swiftdata/schema/attribute/option/preservevalueondeletion) Persists values in the persistent history when the model is deleted.
+* [#Unique Macro](https://developer.apple.com/documentation/SwiftData/Unique(_:)) Defines a model property as a unique constraint.
 
 # Swift Testing
 ## Chapter
