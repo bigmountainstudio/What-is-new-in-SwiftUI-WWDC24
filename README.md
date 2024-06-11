@@ -12,6 +12,11 @@ A list of everything new in SwiftUI after WWDC 2024.
 # SwiftUI Views
 ## CONTROL VIEWS
 * [TabView]()
+## IMAGE (Might consider extracting Symbols into its own section)
+* [ReplaceSymbolEffect](https://developer.apple.com/documentation/symbols/replacesymboleffect) - New magic replace function
+* [SymbolEffect](https://developer.apple.com/documentation/symbols/symboleffect/) (New effects: .breath, .rotate, .wiggle)
+## PAINTS
+* [MeshGradient](https://developer.apple.com/documentation/swiftui/meshgradient/) A two-dimensional gradient defined by a 2D grid of positioned colors.
 
 # SwiftUI Animations
 ## Chapter
@@ -27,11 +32,8 @@ A list of everything new in SwiftUI after WWDC 2024.
 
 # Advanced SwiftUI
 ## Controls
-* [ControlWidgetButton](https://developer.apple.com/documentation/widgetkit/controlwidgetbutton/)
-## Image
-* [SymbolEffect](https://developer.apple.com/documentation/symbols/symboleffect/) (New effects: .breath, .rotate, .wiggle)
-## Paints
-* [MeshGradient](https://developer.apple.com/documentation/swiftui/meshgradient/)
+* [ControlWidgetButton](https://developer.apple.com/documentation/widgetkit/controlwidgetbutton/) A control template representing a button.
+
   
 (📕 = Added to books)
 
