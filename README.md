@@ -28,8 +28,8 @@ A list of everything new in SwiftUI after WWDC 2024.
 * [MeshGradient](https://developer.apple.com/documentation/swiftui/meshgradient/) A two-dimensional gradient defined by a 2D grid of positioned colors.
 
 # SwiftUI Animations
-## Chapter
-* [Topic]()
+## Navigation Animations (New chapter)
+* [navigationTransition](https://developer.apple.com/documentation/swiftui/view/navigationtransition(_:)) - Like adding matchedGeometryEffect to views.
 
 # SwiftData
 ## Mock Data
