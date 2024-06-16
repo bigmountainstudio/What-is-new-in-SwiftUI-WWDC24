@@ -43,8 +43,7 @@ A list of everything new in SwiftUI after WWDC 2024.
 * [`#Unique`](https://developer.apple.com/documentation/SwiftData/Unique(_:)) Defines a model property as a unique constraint.
 
 # Swift Testing
-## Chapter
-* [Topic]()
+[New framework released](https://developer.apple.com/xcode/swift-testing/)
 
 # Advanced SwiftUI
 ## Controls
