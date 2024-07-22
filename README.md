@@ -12,7 +12,7 @@ A list of everything new in SwiftUI after WWDC 2024.
 # SwiftUI Views
 ## CONTROL VIEWS
 * [Form - ForEach(subviewOf:)](https://developer.apple.com/documentation/swiftui/foreach/init(subviews:content:))
-* [ScrollView(limitBehavior:](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior) Limits number of views scrolled to (one or few).
+* [ScrollView(limitBehavior: .alwaysByFew)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior) Limits number of views scrolled to (one or few). Note: It's the parameter that is new.
 * [ScrollView.onScrollGeometryChange(for:)](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)/) React to scrolling changes.
 * [ScrollView.onScrollPhaseChange](https://developer.apple.com/documentation/SwiftUI/View/onScrollPhaseChange(_:)-7mica) React to changes in the scroll phase (animating, decelerating, idle, interacting, tracking)
 * [ScrollView.onScrollVisibilityChange(threshold:)](https://developer.apple.com/documentation/SwiftUI/View/onScrollVisibilityChange(threshold:_:)) Trigger action when scrolled past a point.
