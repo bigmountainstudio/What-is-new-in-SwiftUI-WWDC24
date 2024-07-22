@@ -54,6 +54,6 @@ A list of everything new in SwiftUI after WWDC 2024.
 
 # Helpful References
 * [SwiftUI Updates](https://developer.apple.com/documentation/updates/swiftui)
-
+* [SwiftUI Deprecations](https://developer.apple.com/documentation/swiftui/view/autocapitalization(_:))
 
 ![color logo book](https://github.com/bigmountainstudio/What-is-new-in-SwiftUI-WWDC23/assets/24855856/4509ce75-14ee-43e7-a62d-c46d7200ddda)
