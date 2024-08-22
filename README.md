@@ -3,16 +3,19 @@
 
 By [Big Mountain Studio](https://www.bigmountainstudio.com/)
 
-A list of everything new in SwiftUI after WWDC 2024.
+A list of everything new in SwiftUI after WWDC 2024 that I'll be updating my books with.
+Note: There may be other new technologies outside the scope of my books too.
 
+![swiftui essentials](https://github.com/user-attachments/assets/3b224856-0fa0-407c-9d8a-25c989334070)
 # SwiftUI Essentials - Architecting and Scalable & Maintainable Apps
 ## @State, @StateObject
 * [@Previewable](https://developer.apple.com/documentation/swiftui/previewable()) Use in front of `@State` and `@StateObject` in previews.
 
-# SwiftUI Views
+![swiftui views mastery](https://github.com/user-attachments/assets/c743008d-0dfd-4e6e-b2f2-6fb3926e96ba)
+# SwiftUI Views Mastery
 ## CONTROL VIEWS
 * [Form - ForEach(subviewOf:)](https://developer.apple.com/documentation/swiftui/foreach/init(subviews:content:))
-* [ScrollView(limitBehavior: .alwaysByFew)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior) Limits number of views scrolled to (one or few). Note: It's the parameter that is new.
+* [ScrollView(limitBehavior: .alwaysByFew)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior) Limits the number of views scrolled to (one or few). Note: It's a new parameter.
 * [ScrollView.onScrollGeometryChange(for:)](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)/) React to scrolling changes.
 * [ScrollView.onScrollPhaseChange](https://developer.apple.com/documentation/SwiftUI/View/onScrollPhaseChange(_:)-7mica) React to changes in the scroll phase (animating, decelerating, idle, interacting, tracking)
 * [ScrollView.onScrollVisibilityChange(threshold:)](https://developer.apple.com/documentation/SwiftUI/View/onScrollVisibilityChange(threshold:_:)) Trigger action when scrolled past a point.
@@ -27,11 +30,13 @@ A list of everything new in SwiftUI after WWDC 2024.
 ## PAINTS
 * [MeshGradient](https://developer.apple.com/documentation/swiftui/meshgradient/) A two-dimensional gradient defined by a 2D grid of positioned colors.
 
-# SwiftUI Animations
+![swiftui animations mastery](https://github.com/user-attachments/assets/4548cda8-83f7-4504-ac59-2e867ced2ac1)
+# SwiftUI Animations Mastery
 ## Navigation Animations (New chapter)
 * [navigationTransition](https://developer.apple.com/documentation/swiftui/view/navigationtransition(_:)) - Like adding matchedGeometryEffect to views.
 
-# SwiftData
+![swiftdata mastery](https://github.com/user-attachments/assets/1adc6ad4-6330-4dc0-8d69-f71c551f87ec)
+# SwiftData Mastery
 ## Mock Data
 * [PreviewModifier + PreviewTrait](https://developer.apple.com/documentation/swiftui/previewmodifier) Allows set up of mock data that is accessible through the `#Preview(trait:)` parameter.
 * [@Previewable](https://developer.apple.com/documentation/swiftui/previewable()) Use in front of `@Query` in previews.
@@ -42,10 +47,12 @@ A list of everything new in SwiftUI after WWDC 2024.
 * [`#Index`](https://developer.apple.com/documentation/swiftdata/index(_:)-74ia2/) Specify properties in a model that are filtered on a lot to improve performance.
 * [`#Unique`](https://developer.apple.com/documentation/SwiftData/Unique(_:)) Defines a model property as a unique constraint.
 
-# Swift Testing
+
+# Swift Testing (Potential Book)
 [New framework released](https://developer.apple.com/xcode/swift-testing/)
 
-# Advanced SwiftUI
+
+# Advanced SwiftUI (Potential Book split off from SwiftUI Views Mastery)
 ## Controls
 * [ControlWidgetButton](https://developer.apple.com/documentation/widgetkit/controlwidgetbutton/) A control template representing a button.
 
