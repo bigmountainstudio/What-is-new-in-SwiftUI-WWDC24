@@ -14,7 +14,6 @@ Note: There may be other new technologies outside the scope of my books too.
 ![swiftui views mastery](https://github.com/user-attachments/assets/c743008d-0dfd-4e6e-b2f2-6fb3926e96ba)
 # SwiftUI Views Mastery
 ## CONTROL VIEWS
-* [Form - ForEach(subviewOf:)](https://developer.apple.com/documentation/swiftui/foreach/init(subviews:content:))
 * [ScrollView(limitBehavior: .alwaysByFew)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior) Limits the number of views scrolled to (one or few). Note: It's a new parameter.
 * [ScrollView.onScrollGeometryChange(for:)](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)/) React to scrolling changes.
 * [ScrollView.onScrollPhaseChange](https://developer.apple.com/documentation/SwiftUI/View/onScrollPhaseChange(_:)-7mica) React to changes in the scroll phase (animating, decelerating, idle, interacting, tracking)
@@ -53,6 +52,8 @@ Note: There may be other new technologies outside the scope of my books too.
 
 
 # Advanced SwiftUI (Potential Book split off from SwiftUI Views Mastery)
+## Containers
+* * [ForEach(subviews:) (Previously ForEach(subviewsOf:))](https://developer.apple.com/documentation/swiftui/foreach/init(subviews:content:)) A way to iterate through all the views within a container.
 ## Controls
 * [ControlWidgetButton](https://developer.apple.com/documentation/widgetkit/controlwidgetbutton/) A control template representing a button.
 
