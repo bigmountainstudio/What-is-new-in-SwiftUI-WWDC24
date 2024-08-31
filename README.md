@@ -14,11 +14,6 @@ Note: There may be other new technologies outside the scope of my books too.
 ![swiftui views mastery](https://github.com/user-attachments/assets/c743008d-0dfd-4e6e-b2f2-6fb3926e96ba)
 # SwiftUI Views Mastery
 ## CONTROL VIEWS
-* [ScrollView(limitBehavior: .alwaysByFew|.alwaysByOne)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior/limitbehavior) Limits the number of views scrolled to (one or few). Note: They are new parameter options.
-* [ScrollView.onScrollGeometryChange(for:)](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)/) React to scrolling changes.
-* [ScrollView.onScrollPhaseChange](https://developer.apple.com/documentation/SwiftUI/View/onScrollPhaseChange(_:)-7mica) React to changes in the scroll phase (animating, decelerating, idle, interacting, tracking)
-* [ScrollView.onScrollVisibilityChange(threshold:)](https://developer.apple.com/documentation/SwiftUI/View/onScrollVisibilityChange(threshold:_:)) Trigger action when scrolled past a point.
-* [ScrollView.scrollPosition(:anchor:](https://developer.apple.com/documentation/SwiftUI/View/scrollPosition(_:anchor:)) Scroll to a view, offset, or edge.
 * [Tab](https://developer.apple.com/documentation/swiftui/tab) The `tabItem` modifier is deprecated. Use this new `Tab` view to construct tabs.
 * [Text(format:](https://developer.apple.com/documentation/foundation/formatstyle) New format styles functions (offset, reference, stopwatch, timer counting down & up)
 ## IMAGE (Might consider extracting Symbols into its own section)
@@ -56,6 +51,11 @@ Note: There may be other new technologies outside the scope of my books too.
 * * [ForEach(subviews:) (Previously ForEach(subviewsOf:))](https://developer.apple.com/documentation/swiftui/foreach/init(subviews:content:)) A way to iterate through all the views within a container.
 ## Controls
 * [ControlWidgetButton](https://developer.apple.com/documentation/widgetkit/controlwidgetbutton/) A control template representing a button.
+* [ScrollView(limitBehavior: .alwaysByFew|.alwaysByOne)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior/limitbehavior) Limits the number of views scrolled to (one or few). Note: They are new parameter options.
+* [ScrollView.onScrollGeometryChange(for:)](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)/) React to scrolling changes.
+* [ScrollView.onScrollPhaseChange](https://developer.apple.com/documentation/SwiftUI/View/onScrollPhaseChange(_:)-7mica) React to changes in the scroll phase (animating, decelerating, idle, interacting, tracking)
+* [ScrollView.onScrollVisibilityChange(threshold:)](https://developer.apple.com/documentation/SwiftUI/View/onScrollVisibilityChange(threshold:_:)) Trigger action when scrolled past a point.
+* [ScrollView.scrollPosition(:anchor:](https://developer.apple.com/documentation/SwiftUI/View/scrollPosition(_:anchor:)) Scroll to a view, offset, or edge.
 
   
 (📕 = Added to books)
