@@ -14,7 +14,7 @@ Note: There may be other new technologies outside the scope of my books too.
 ![swiftui views mastery](https://github.com/user-attachments/assets/c743008d-0dfd-4e6e-b2f2-6fb3926e96ba)
 # SwiftUI Views Mastery
 ## CONTROL VIEWS
-* [ScrollView(limitBehavior: .alwaysByFew)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior) Limits the number of views scrolled to (one or few). Note: It's a new parameter.
+* [ScrollView(limitBehavior: .alwaysByFew|.alwaysByOne)](https://developer.apple.com/documentation/swiftui/viewalignedscrolltargetbehavior/limitbehavior) Limits the number of views scrolled to (one or few). Note: They are new parameter options.
 * [ScrollView.onScrollGeometryChange(for:)](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)/) React to scrolling changes.
 * [ScrollView.onScrollPhaseChange](https://developer.apple.com/documentation/SwiftUI/View/onScrollPhaseChange(_:)-7mica) React to changes in the scroll phase (animating, decelerating, idle, interacting, tracking)
 * [ScrollView.onScrollVisibilityChange(threshold:)](https://developer.apple.com/documentation/SwiftUI/View/onScrollVisibilityChange(threshold:_:)) Trigger action when scrolled past a point.
